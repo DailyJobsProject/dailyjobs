@@ -1,9 +1,11 @@
 from django.contrib.auth import login
 from django.shortcuts import redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 
 from .forms import CompanySignUpForm, EmployeeSignUpForm
 from .models import User
+
+
 
 class CompanySignUpView(CreateView):
     model = User
@@ -32,3 +34,6 @@ class EmployeeSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('#')
+
+class SignUpView(TemplateView):
+    template_name = 'registration/signup.html'
