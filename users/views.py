@@ -37,3 +37,6 @@ class EmployeeSignUpView(CreateView):
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
+
+class SignInView(TemplateView):
+    template_name = 'registration/login.html'
