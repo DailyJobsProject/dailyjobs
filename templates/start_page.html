@@ -2,6 +2,15 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
+<ul><a href="{% url 'posts:create' %}">Create Post</a> </ul>
+<ul><a href="{% url 'posts:list' %}">Posts List</a> </ul>
+{% else %}
+
 <ul><a href="{% url 'login' %}">Log In</a></ul>
 <ul><a href="{% url 'users:signup' %}">Sign Up</a></ul>
+
+
+{% endif %}
 {% endblock %}

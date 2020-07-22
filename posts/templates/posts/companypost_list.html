@@ -1,0 +1,9 @@
+{% block content %}
+
+{% for post in posts %}
+
+<ul><a href=" {% url 'detail' post.pk %}" >{{post.title}}</a> </ul>
+
+{% endfor %}
+
+{% endblock %}
