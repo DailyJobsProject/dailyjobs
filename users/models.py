@@ -14,4 +14,4 @@ class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    employee_telephone = models.CharField(max_length=254)
+    telephone = models.CharField(max_length=254)

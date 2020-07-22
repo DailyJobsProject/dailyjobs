@@ -9,7 +9,6 @@ from .forms import CompanySignUpForm, EmployeeSignUpForm
 from .models import User
 
 
-
 class CompanySignUpView(CreateView):
     model = User
     form_class = CompanySignUpForm
@@ -22,7 +21,7 @@ class CompanySignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('#')
+        return redirect('start_page.html')
 
 class EmployeeSignUpView(CreateView):
     model = User
@@ -36,10 +35,10 @@ class EmployeeSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('#')
+        return redirect('start_page.html')
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
-class SignInView(TemplateView):
+class LogInView(TemplateView):
     template_name = 'registration/login.html'
