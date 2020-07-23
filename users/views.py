@@ -3,10 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 from django.contrib.auth import login
 from django.shortcuts import redirect
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, DetailView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import CompanySignUpForm, EmployeeSignUpForm
-from .models import User
+from .models import User, Company, Employee
 from django.urls import reverse_lazy
 
 class CompanySignUpView(CreateView):
@@ -22,7 +23,7 @@ class CompanySignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('start_page.html')
+        return redirect('/')
 
 class EmployeeSignUpView(CreateView):
     model = User
@@ -37,7 +38,7 @@ class EmployeeSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('start_page.html')
+        return redirect('/')
 
     
 
@@ -46,3 +47,18 @@ class SignUpView(TemplateView):
 
 class LogInView(TemplateView):
     template_name = 'registration/login.html'
+
+
+class CompanyDetailView(LoginRequiredMixin, DetailView):
+    model = Company
+    template_name = "company_detail.html"
+
+class EmployeeDetailView(LoginRequiredMixin, DetailView):
+    model = Employee
+    template_name = "employee_detail.html"
+
+class UpdateCompanyView(LoginRequiredMixin, UpdateView):
+    login_url = 'accounts/login'
+    model = Company
+    fields = ['name']
+    template_name = 'company_update.html'

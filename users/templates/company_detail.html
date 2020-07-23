@@ -1,0 +1,16 @@
+<p>{% if company.name == user.company.name %}</p>
+
+<h2>@{{company.name}}</h2>
+
+<p>photo placeholder</p>
+
+<h2><a href="{% url 'posts:list' %}">My posts</a></h2>
+
+<h2>Description</h2>
+<a href="{% url 'users:company_update' pk=user.pk%}">Edit Description</a>
+
+{% else %}
+
+<h2>Not authorized</h2>
+
+{% endif %}

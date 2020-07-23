@@ -6,6 +6,7 @@
 
 <ul><a href="{% url 'posts:create' %}">Create Post</a> </ul>
 <ul><a href="{% url 'posts:list' %}">Posts List</a> </ul>
+<ul><a href="{% url 'users:company_detail' pk=user.pk %}">@{{ user.username }}</a></ul>
 {% else %}
 
 <ul><a href="{% url 'login' %}">Log In</a></ul>
