@@ -9,6 +9,7 @@ User = get_user_model()
 
 
 class CompanyPost(models.Model):
+    user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
     title = models.TextField(max_length=50)
     description = models.TextField(editable=True)
     created_at = models.DateTimeField(auto_now=True)

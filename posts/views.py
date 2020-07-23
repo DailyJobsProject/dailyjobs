@@ -10,13 +10,13 @@ from .models import CompanyPost
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
-    fields = '__all__'
+    fields = ('title', 'description')
     model = CompanyPost
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.picture = self.request.FILES
+        self.object.image = self.request.FILES
         self.object.save()
         return super().form_valid(form)
 
@@ -30,6 +30,7 @@ class PostListView(LoginRequiredMixin,ListView):
     model= CompanyPost
     template_name= 'posts/companypost_list.html'
     context_object_name = 'posts'
+    queryset = CompanyPost.objects.all()
 
 
 
