@@ -29,6 +29,7 @@ class PostDetailView(DetailView):
 class PostListView(LoginRequiredMixin,ListView):
     model= CompanyPost
     template_name= 'posts/companypost_list.html'
+    context_object_name = 'posts'
 
 
 

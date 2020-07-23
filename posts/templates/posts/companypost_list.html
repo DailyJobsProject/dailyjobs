@@ -1,8 +1,10 @@
 {% block content %}
 
+<p>user: {{user.username}}</p>
+
 {% for post in posts %}
 
-<ul><a href=" {% url 'detail' post.pk %}" >{{post.title}}</a> </ul>
+<ul></ul><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></ul>
 
 {% endfor %}
 
