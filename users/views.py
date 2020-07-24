@@ -68,14 +68,10 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'company_update.html'
 
 def image_upload_view(request):
-    """Process images uploaded by users"""
+    context = {}
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            # Get the current instance object to display in the template
-            img_obj = form.instance
-            return render(request, 'registration/upload.html', {'form': form, 'img_obj': img_obj})
-    else:
-        form = UploadFileForm()
-    return render(request, 'registration/upload.html', {'form': form})
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url'] = fs.url(name)
+    return render(request, 'registration/upload.html', context)

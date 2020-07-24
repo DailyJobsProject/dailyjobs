@@ -17,12 +17,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 AUTH_USER_MODEL = 'users.User'
 
-STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'static')
-    ]
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -130,5 +124,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'posts:list'
+LOGIN_REDIRECT_URL = '/'
+
 LOGOUT_REDIRECT_URL = '/'
+
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, 'static')
+    ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
