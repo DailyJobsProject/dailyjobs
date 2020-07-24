@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content %}
-
-
-
 <p>{% if employee.user == user.employee.user %}</p>
 
 <h2>@{{employee.user}}</h2>
 
-<img src="{{ employee.get_photo_url }}", class="img-responsive thumbnail" alt="img" style="height: 250px; width: 250px;">
+
+{% if employee.image %}
+<img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
 <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
     <input type="submit" value="Change Profile Pic" />
+
+{% else %}
+
+<img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 150px; width: 150px;">
+<form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
+    <input type="submit" value="Change Profile Pic" />
+
+{% endif %}
+    
+
 </form>
 
 
