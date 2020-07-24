@@ -1,12 +1,16 @@
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
-
+import os
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 # Create your views here.
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.views.generic import CreateView, TemplateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import CompanySignUpForm, EmployeeSignUpForm
+from .forms import CompanySignUpForm, EmployeeSignUpForm, UploadFileForm
 from .models import User, Company, Employee
 from django.urls import reverse_lazy
 
@@ -62,3 +66,16 @@ class UpdateCompanyView(LoginRequiredMixin, UpdateView):
     model = Company
     fields = ['name']
     template_name = 'company_update.html'
+
+def image_upload_view(request):
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'registration/upload.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = UploadFileForm()
+    return render(request, 'registration/upload.html', {'form': form})

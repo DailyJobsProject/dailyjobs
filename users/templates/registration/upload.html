@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_employee %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form_as_p }}
+    <input type="file", name="document">
+    <button type="submit">Upload</button>
+
+
+</form>
+{% endif %}
+{%endblock%}

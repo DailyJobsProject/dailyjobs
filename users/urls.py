@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import path
 from . import views
 
@@ -11,5 +12,7 @@ urlpatterns = [
     path('company/<int:pk>/edit/', views.UpdateCompanyView.as_view(), name='company_update'),
 
     path('employee/<int:pk>', views.EmployeeDetailView.as_view(), name='employee_detail'),
+    path('upload', views.image_upload_view, name='upload'),
+
     
 ]

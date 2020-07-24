@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
-from .models import Company, User, Employee
+from .models import Company, User, Employee, Document
 from django.contrib.auth import get_user_model
 
 class CompanySignUpForm(UserCreationForm):
@@ -57,3 +57,9 @@ class EmployeeSignUpForm(UserCreationForm):
         employee.telephone += self.clean()['telephone']
         employee.save()
         return user
+
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ('document', 'description')
+
