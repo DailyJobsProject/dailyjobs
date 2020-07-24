@@ -1,47 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
-    
+     
+    {% if company.name == user.company.name %}
+        <h2>@{{company.name}}</h2>
 
-    
-<p>{% if company.name == user.company.name %}</p>
+        {% if company.image %}
+            <img src="{{ company.image.url }}", class="cprofilepic" alt="img" style="height: 100px; width: 100px;">
+            <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
+                <input type="submit" value="Change Profile Pic" />
+            </form>
+            
+        {% else %}
+            <img src="{% static 'users/user.png' %}" alt="Upload profile pic">
+            <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
+                <input type="submit" value="Change Profile Pic" />
+            </form>
 
-<h2>@{{company.name}}</h2>
+        {% endif %}
 
+        <h2><a href="{% url 'posts:list' %}">My posts</a></h2>
 
-{% if company.image %}
+        <h2>About</h2>
+        {{company.about}}
+        <form action="{% url 'users:company_update' pk=user.pk%}">
+            <input type="submit" value="Edit About" />
+        </form>
 
-<img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
-<form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
-    <input type="submit" value="Change Profile Pic" />
-    
-{% else %}
+        <a href="{% url 'password_reset' %}">Password reset</a>
 
-<img src="{% static 'users/user.png' %}" alt="Upload profile pic">
-<form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
-    <input type="submit" value="Change Profile Pic" />
+    {% else %}
 
-{% endif %}
+        <h2>Not authorized</h2>
 
-</form>
+    {% endif %}
 
-
-
-<h2><a href="{% url 'posts:list' %}">My posts</a></h2>
-
-<h2>About</h2>
-{{company.about}}
-<form action="{% url 'users:company_update' pk=user.pk%}">
-    <input type="submit" value="Edit About" />
-</form>
-
-<a href="{% url 'password_reset' %}">Password reset</a>
-
-{% else %}
-
-<h2>Not authorized</h2>
-
-{% endif %}
 {% endblock  %}

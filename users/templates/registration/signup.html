@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Sign Up as:</h1>
-<ul><a href="{% url 'users:company_signup' %}">Company</a></ul>
-<ul><a href="{% url 'users:employee_signup' %}">Employee</a></ul>
+
+    <h1>Sign Up as:</h1>
+    <ul><a href="{% url 'users:company_signup' %}">Company</a></ul>
+    <ul><a href="{% url 'users:employee_signup' %}">Employee</a></ul>
+    
 {% endblock %}
