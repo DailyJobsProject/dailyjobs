@@ -2,17 +2,12 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-<div class="container">
-    <a href="{% url 'posts:create' %}">Create Post</a><br>
-    <a href="{% url 'posts:list' %}">Posts List</a><br>
+    {% if user.is_authenticated %}
+        <div class="container">
+            <a href="{% url 'posts:create' %}">Create Post</a><br>
+            <a href="{% url 'posts:list' %}">Posts List</a><br>
+        </div>
 
-{% else %}
-    <a href="{% url 'users:signup' %}">Sign Up</a><br>
-</div>
+    {% endif %}
 
-
-
-
-{% endif %}
 {% endblock %}

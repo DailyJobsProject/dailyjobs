@@ -77,3 +77,12 @@ class EProfilePicUpdateView(LoginRequiredMixin,UpdateView):
     model = Employee
     fields = ['image']
     template_name = 'eprofilepic_update.html'
+
+def image_upload_view(request):
+    context = {}
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url'] = fs.url(name)
+    return render(request, 'registration/upload.html', context)

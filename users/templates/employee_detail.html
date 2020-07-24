@@ -4,13 +4,13 @@
 
 {% block content %}
 
-{% if employee.user == user.employee.user %}<
+{% if employee.user == user.employee.user %}
 
     <h2>@{{employee.user}}</h2>
 
 
     {% if employee.image %}
-        <img src="{{ employee.image.url }}", class="eprofilepic" alt="img" style="height: 100px; width: 100px;">
+        <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
         <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
             <input type="submit" value="Change Profile Pic" />
         </form>
