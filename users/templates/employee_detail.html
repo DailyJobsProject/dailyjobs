@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<p>{% if employee.user == user.employee.user %}</p>
+
+<h2>@{{employee.user}}</h2>
+
+<img src="{{ employee.get_photo_url }}", class="img-responsive thumbnail" alt="img" style="height: 250px; width: 250px;">
+<form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
+    <input type="submit" value="Change Profile Pic" />
+</form>
+
+
+<h2>About</h2>
+{{employee.about}}
+<form action="{% url 'users:employee_update' pk=user.pk%}">
+    <input type="submit" value="Edit About" />
+</form>
+
+<a href="{% url 'password_reset' %}">Password reset</a>
+
+{% else %}
+
+<h2>Not authorized</h2>
+
+{% endif %}
+{% endblock  %}

@@ -67,11 +67,24 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     fields = ['about']
     template_name = 'company_update.html'
 
+class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'accounts/login'
+    model = Employee
+    fields = ['about']
+    template_name = 'employee_update.html'
+
+
 class CProfilePicUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'accounts/login'
     model = Company
     fields = ['image']
     template_name = 'cprofilepic_update.html'
+
+class EProfilePicUpdateView(LoginRequiredMixin,UpdateView):
+    login_url = 'accounts/login'
+    model = Employee
+    fields = ['image']
+    template_name = 'eprofilepic_update.html'
 
 def image_upload_view(request):
     context = {}
