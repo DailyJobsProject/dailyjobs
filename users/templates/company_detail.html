@@ -1,17 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+
+    
 <p>{% if company.name == user.company.name %}</p>
 
 <h2>@{{company.name}}</h2>
 
-<p>photo placeholder</p>
+<img src="{{ company.image.url }}" alt="img" style="height: 250px; width: 250px;">
+<form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
+    <input type="submit" value="Change Profile Pic" />
+</form>
+
 
 <h2><a href="{% url 'posts:list' %}">My posts</a></h2>
 
 <h2>About</h2>
 {{company.about}}
-<p><a href="{% url 'users:company_update' pk=user.pk%}">Edit about section</a></p>
+<form action="{% url 'users:company_update' pk=user.pk%}">
+    <input type="submit" value="Edit About" />
+</form>
+
+<a href="{% url 'password_reset' %}">Password reset</a>
 
 {% else %}
 
 <h2>Not authorized</h2>
 
 {% endif %}
+{% endblock  %}

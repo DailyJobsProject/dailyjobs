@@ -6,19 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <ul class="sidebar-nav">
-        {% if user.is_authenticated %}
-        <li>User: {{ user.get_username }}</li>
-        <a href="{% url 'password_reset' %}">Password reset</a>
-        <a href="{% url 'logout' %}">Logout</a>
+    <a href="/">Logo</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'users:company_detail' pk=user.pk %}">@{{user.username}}</a>
+    <a href="{% url 'logout' %}">Logout</a>
 
-        <a href="{% url 'users:upload' %}"> Upload </a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
 
-        {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        {% endif %}
-    </ul>
+    {% endif %}
 
     {% block content %}{% endblock  %}
         

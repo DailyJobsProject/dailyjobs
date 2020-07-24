@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView, TemplateView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import CompanySignUpForm, EmployeeSignUpForm, UploadFileForm
+from .forms import CompanySignUpForm, EmployeeSignUpForm
 from .models import User, Company, Employee
 from django.urls import reverse_lazy
 
@@ -66,6 +66,12 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     model = Company
     fields = ['about']
     template_name = 'company_update.html'
+
+class CProfilePicUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'accounts/login'
+    model = Company
+    fields = ['image']
+    template_name = 'cprofilepic_update.html'
 
 def image_upload_view(request):
     context = {}

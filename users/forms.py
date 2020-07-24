@@ -57,9 +57,3 @@ class EmployeeSignUpForm(UserCreationForm):
         employee.telephone += self.clean()['telephone']
         employee.save()
         return user
-
-class UploadFileForm(forms.ModelForm):
-    class Meta:
-        model = Document
-        fields = ('document', 'description')
-

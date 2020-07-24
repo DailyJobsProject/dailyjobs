@@ -14,6 +14,7 @@ class Company(models.Model):
     name = models.CharField(max_length=254)
     telephone = models.CharField(max_length=254)
     about = models.TextField(max_length=1000)
+    image = models.ImageField(upload_to='profile_pics')
 
     def __str__(self):
         return self.name
@@ -26,6 +27,7 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     telephone = models.CharField(max_length=254)
+    
 
 
     def __str__(self):
