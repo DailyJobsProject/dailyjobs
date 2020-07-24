@@ -61,10 +61,10 @@ class EmployeeDetailView(LoginRequiredMixin, DetailView):
     model = Employee
     template_name = "employee_detail.html"
 
-class UpdateCompanyView(LoginRequiredMixin, UpdateView):
+class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'accounts/login'
     model = Company
-    fields = ['name']
+    fields = ['about']
     template_name = 'company_update.html'
 
 def image_upload_view(request):

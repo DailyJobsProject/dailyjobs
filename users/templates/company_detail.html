@@ -6,8 +6,9 @@
 
 <h2><a href="{% url 'posts:list' %}">My posts</a></h2>
 
-<h2>Description</h2>
-<a href="{% url 'users:company_update' pk=user.pk%}">Edit Description</a>
+<h2>About</h2>
+{{company.about}}
+<p><a href="{% url 'users:company_update' pk=user.pk%}">Edit about section</a></p>
 
 {% else %}
 

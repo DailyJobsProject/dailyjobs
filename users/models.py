@@ -13,6 +13,7 @@ class Company(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=254)
     telephone = models.CharField(max_length=254)
+    about = models.TextField(max_length=1000)
 
     def __str__(self):
         return self.name
