@@ -7,13 +7,13 @@
         <h2>@{{company.name}}</h2>
 
         {% if company.image %}
-            <img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
+            <img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
             <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
                 <input type="submit" value="Change Profile Pic" />
             
             
         {% else %}
-            <img src="{% static 'users/user.png' %}" alt="Upload profile pic">
+            <img src="{% static 'users/user.png' %}" style="height: 128px; width: 128px;" alt="Upload profile pic">
             <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
                 <input type="submit" value="Change Profile Pic" />
 

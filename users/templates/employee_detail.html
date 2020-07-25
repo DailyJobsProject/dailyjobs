@@ -10,13 +10,13 @@
 
 
     {% if employee.image %}
-        <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
+        <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
         <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
             <input type="submit" value="Change Profile Pic" />
         </form>
 
     {% else %}
-        <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 150px; width: 150px;">
+        <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 128px; width: 128px;">
         <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
             <input type="submit" value="Change Profile Pic" />
         </form>

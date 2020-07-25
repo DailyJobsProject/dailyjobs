@@ -3,9 +3,16 @@
 {% block content %}
 
     {% if user.is_authenticated %}
+
+        {% if user.is_company %}
+
         <div class="container">
             <a href="{% url 'posts:create' %}">Create Post</a><br>
+        </div>
+        {% endif %}x`
+        <div class="container">
             <a href="{% url 'posts:list' %}">Posts List</a><br>
+
         </div>
 
     {% endif %}
