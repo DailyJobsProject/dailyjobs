@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
 
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 
 from .models import CompanyPost
 
@@ -23,6 +24,20 @@ class PostDetailView(DetailView):
 
 class PostListView(LoginRequiredMixin,ListView):
     model= CompanyPost
-    template_name= 'posts/companypost_list.html'
+    template_name = 'posts/companypost_list.html'
     context_object_name = 'posts'
     queryset = CompanyPost.objects.all()
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = CompanyPost
+    template_name = 'posts/companypost_delete.html'
+    context_object_name = 'posts'
+    success_url = reverse_lazy('startpage')
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = CompanyPost
+    fields = ['title', 'description']
+    template_name = 'posts/companypost_update.html'
+    context_object_name = 'posts'
+    success_url = reverse_lazy('startpage')
