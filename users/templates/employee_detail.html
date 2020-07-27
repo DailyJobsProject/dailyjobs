@@ -30,23 +30,39 @@
         <input type="submit" value="Edit About" />
     </form>
 
-    <a href="{% url 'password_reset' %}">Password reset</a>
+
+    {% if employee.cv %}
+        <a href="{{ employee.cv.url }}">CV</a>
+
+        <form action="{% url 'users:cv_update' pk=user.pk %}">
+            <input type="submit" value="Upload CV" />
+        </form>
 
     {% else %}
+        <p>CV not uploaded</p>
 
-        <h2>@{{employee.user}}</h2>
+        <form action="{% url 'users:cv_update' pk=user.pk %}">
+            <input type="submit" value="Upload CV" />
+        </form>
 
-        {% if employee.image %}
-            <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
-
-        {% else %}
-            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
-
-        {% endif %}
-
-        <h2>About</h2>
-        {{employee.about}}
-        
     {% endif %}
+
+
+{% else %}
+
+    <h2>@{{employee.user}}</h2>
+
+    {% if employee.image %}
+        <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
+
+    {% else %}
+        <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+
+    {% endif %}
+
+    <h2>About</h2>
+    {{employee.about}}
+
+{% endif %}
 
 {% endblock  %}

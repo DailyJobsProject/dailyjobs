@@ -30,6 +30,7 @@ class Employee(models.Model):
     telephone = models.CharField(max_length=254)
     about = models.TextField(max_length=1000, default='Tell us something about you')
     image = models.ImageField(upload_to='profile_pics')
+    cv = models.FileField(upload_to='CVs')
 
     def __str__(self):
         return self.user

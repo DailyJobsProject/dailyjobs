@@ -12,10 +12,19 @@ class CompanyPost(models.Model):
     title = models.TextField(max_length=50)
     description = models.TextField(editable=True)
     created_at = models.DateTimeField(auto_now=True)
-    # image = models.ImageField(upload_to=MEDIA_ROOT, default='/static/img/default.png')
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('posts:detail', kwargs={'pk': self.pk})
+
+class Application(models.Model):
+    post = models.ForeignKey(CompanyPost, related_name='applications', on_delete=models.CASCADE)
+    name = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.name)
+
+    def get_absolute_url(self):
+        return reverse('users:employee_detail', kwargs={'pk': self.pk})

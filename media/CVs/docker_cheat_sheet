@@ -1,0 +1,21 @@
+docker ps: shows all running containers
+
+docker pull <image-name>: pulls an image (ex: mongo, python, etc.)
+
+docker run -d <image-name>: (creates and) runs a detached image (-d) (so you can use the current terminal)
+
+docker images: displays all downloaded images
+
+docker stop <container-name>: stops a running container
+
+docker rm <container-name>: deletes a container
+
+docker rmi <image-name>: deletes an image
+
+docker build . -t <name>: creates a new image from the current folder with specified name (-t)
+
+docker run -it <image-name>: interactively run an image
+
+sudo docker tag <image-id> <docker-id>/<image-name/:<tag-name> : image tagging
+
+

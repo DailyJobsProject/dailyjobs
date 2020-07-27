@@ -16,7 +16,6 @@ urlpatterns = [
 
     path('employee/<int:pk>', views.EmployeeDetailView.as_view(), name='employee_detail'),
     path('employee/<int:pk>/edit/', views.EmployeeUpdateView.as_view(), name='employee_update'),
-    path('employee/<int:pk>/profile_pic/edit', views.EProfilePicUpdateView.as_view(), name='eprofilepic_update'),    
-
-    path('upload', views.image_upload_view, name='upload'),
+    path('employee/<int:pk>/profile_pic/edit', views.EProfilePicUpdateView.as_view(), name='eprofilepic_update'),
+    path('employee/<int:pk>/cv/edit', views.CVUpdateView.as_view(), name='cv_update')
 ]
