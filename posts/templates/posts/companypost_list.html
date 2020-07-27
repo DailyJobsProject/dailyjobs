@@ -4,9 +4,7 @@
 
 {% for post in posts %}
 
-    {% if post.user|striptags == user.username|striptags %}
-        <ul><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></ul>
-    {% endif %}
+    <ul><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></ul>    
 
 {% endfor %}
 

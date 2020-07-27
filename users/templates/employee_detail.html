@@ -10,13 +10,13 @@
 
 
     {% if employee.image %}
-        <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
+        <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
         <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
             <input type="submit" value="Change Profile Pic" />
         </form>
 
     {% else %}
-        <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 128px; width: 128px;">
+        <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
         <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
             <input type="submit" value="Change Profile Pic" />
         </form>
@@ -32,10 +32,21 @@
 
     <a href="{% url 'password_reset' %}">Password reset</a>
 
-{% else %}
+    {% else %}
 
-    <h2>Not authorized</h2>
+        <h2>@{{employee.user}}</h2>
 
-{% endif %}
+        {% if employee.image %}
+            <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
+
+        {% else %}
+            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+
+        {% endif %}
+
+        <h2>About</h2>
+        {{employee.about}}
+        
+    {% endif %}
 
 {% endblock  %}

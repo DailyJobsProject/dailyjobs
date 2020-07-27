@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
 from django.contrib.auth import login
+from django.contrib.auth.views import LoginView
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, TemplateView, DetailView, 
                                   UpdateView)
@@ -13,7 +15,7 @@ from .models import User, Company, Employee
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
-class LogInView(TemplateView):
+class LogInView(LoginView):
     template_name = 'registration/login.html'
 
 class CompanySignUpView(CreateView):

@@ -3,7 +3,6 @@
 
 {% block content %}
 
-
     <h4>Create a new Post</h4>
     <form id='postForm' action="{% url 'posts:create' %}" method="POST">
         {% csrf_token %}

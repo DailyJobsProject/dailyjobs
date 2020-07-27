@@ -6,7 +6,14 @@
     <p>Title: {{companypost.title}}</p>
     <p>Description: {{companypost.description}}</p>
     <p>Created at: {{companypost.created_at}}</p>
-    <br>
-{# <!--    <a href="{% url 'product_update' product.pk %}">Update product</a>--> #}
-{# <!--    <a href="{% url 'product_delete' product.pk %}">Delete product</a>--> #}
+
+    {% if company.name == user.company.name %}
+
+        {% for applicant in companypost.applicants.all %}
+
+
+    {% if user.is_employee %}
+        <a href="#">Apply for this job</a>
+
+    {% endif %}
 {% endblock  %}

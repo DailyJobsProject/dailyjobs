@@ -13,7 +13,7 @@
             
             
         {% else %}
-            <img src="{% static 'users/user.png' %}" style="height: 128px; width: 128px;" alt="Upload profile pic">
+            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
             <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
                 <input type="submit" value="Change Profile Pic" />
 
@@ -32,8 +32,20 @@
 
     {% else %}
 
-        <h2>Not authorized</h2>
+        <h2>@{{company.name}}</h2>
 
+        {% if company.image %}
+            <img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
+
+        {% else %}
+            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+
+        {% endif %}
+
+        <h2><a href="{% url 'posts:list' %}">{{company.name}}'s posts</a></h2>
+
+        <h2>About</h2>
+        {{company.about}}
+        
     {% endif %}
-
 {% endblock  %}
