@@ -30,6 +30,7 @@ class PostDetailView(DetailView):
         context = super(PostDetailView , self).get_context_data(**kwargs)
         context['applications'] = Application.objects.all()
         context['all_applicants'] = Application.objects.all().values_list('name', flat=True)
+        context['identifiers'] = Application.objects.all().values_list('identifier', flat=True)
         return context
 
 class PostListView(LoginRequiredMixin,ListView):
@@ -67,6 +68,7 @@ def post_apply(request, pk):
         application = form.save(commit=False)
         application.name = request.user
         application.post = post
+        application.identifier += post.title + request.user.username
         application.save()
         return redirect('posts:detail', pk=post.pk)
     else:

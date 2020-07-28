@@ -7,16 +7,17 @@
     <p>Description: {{companypost.description}}</p>
     <p>Created at: {{companypost.created_at}}</p>
 
+    
     {% if user.is_employee %}
-        {% if user.pk in all_applicants %}}
-            <p>You already applied!</p>
-            <a href="{% url 'posts:application_delete' pk=user.pk %}">Unapply</a>
+        {% if companypost.title|striptags|add:user.username|striptags in identifiers%}
+        <p>You already applied</p>
+        <a href="#">Unapply</a>
 
         {% else %}
-            <a href="{% url 'posts:apply' pk=companypost.pk %}">Apply for this job</a>
+        <a href="{% url 'posts:apply' pk=companypost.pk%}">Apply</a>
 
         {% endif %}
-
+            
     {% elif user.is_company %}
         <br>
         <a href="{% url 'posts:delete' pk=companypost.pk %}">Delete Post</a><br>
@@ -25,7 +26,7 @@
         <p>Applications</p>
         {% for application in applications %}
             {% if application.post|striptags == companypost.title|striptags %}
-                <a href="{% url 'users:employee_detail' pk=application.user.pk %}">{{application.name}}</a>
+                <a href="{% url 'users:employee_detail' pk=application.name.pk %}">{{application.name}}</a>
 
             {% endif %}
 

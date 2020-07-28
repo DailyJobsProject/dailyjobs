@@ -22,6 +22,7 @@ class CompanyPost(models.Model):
 class Application(models.Model):
     post = models.ForeignKey(CompanyPost, related_name='applications', on_delete=models.CASCADE)
     name = models.ForeignKey(User, on_delete=models.CASCADE)
+    identifier = models.CharField(max_length=100)
 
     def __str__(self):
         return str(self.name)
