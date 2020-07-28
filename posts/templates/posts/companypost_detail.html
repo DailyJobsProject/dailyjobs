@@ -7,7 +7,6 @@
     <p>Description: {{companypost.description}}</p>
     <p>Created at: {{companypost.created_at}}</p>
 
-    
     {% if user.is_employee %}
         {% for application in applications %}
             {% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
@@ -23,7 +22,6 @@
 
         {% endif %}
         
-            
     {% elif user.is_company %}
         <br>
         <a href="{% url 'posts:delete' pk=companypost.pk %}">Delete Post</a><br>
