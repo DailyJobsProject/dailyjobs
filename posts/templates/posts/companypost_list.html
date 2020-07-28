@@ -4,20 +4,15 @@
 
 {% if company.user == user.companypost.all %}
     {% for posts in user.posts.all %}
-
-    <ul><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></ul>
+        <ul><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></ul>
 
     {% endfor %}
-
 
 {% endif %}
 
 {% if user.is_employee %}
-
     {% for post in posts %}
-
         <ul><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></ul>
-
 
     {% endfor %}
 
