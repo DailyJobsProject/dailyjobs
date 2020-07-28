@@ -58,8 +58,10 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 class ApplicationDeleteView(LoginRequiredMixin, DeleteView):
     model = Application
     template_name = 'posts/application_delete.html'
-    context_object_name = 'applications'
-    success_url = reverse_lazy('startpage')
+    context_object_name = 'application'
+
+    def get_success_url(self):
+        return reverse_lazy('posts:list')
 
 
 @login_required
@@ -80,9 +82,3 @@ def post_apply(request, pk):
         form = ApplicationForm()
 
     return render(request, 'posts/application_form.html', {'form': form})
-
-
-
-
-
-

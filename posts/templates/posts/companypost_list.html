@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% if company.user == user.companypost.all %}
+{% if user.is_company %}
     {% for posts in user.posts.all %}
         <ul><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></ul>
 

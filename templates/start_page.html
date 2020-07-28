@@ -9,11 +9,19 @@
         <div class="container">
             <a href="{% url 'posts:create' %}">Create Post</a><br>
         </div>
-        {% endif %}
+
+        <div class="container">
+            <a href="{% url 'posts:list' %}">My Posts</a><br>
+        </div>
+
+        {% elif user.is_employee %}
+
         <div class="container">
             <a href="{% url 'posts:list' %}">Posts List</a><br>
-
         </div>
+
+        {% endif %}
+        
 
     {% endif %}
 

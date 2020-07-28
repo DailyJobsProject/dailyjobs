@@ -9,14 +9,20 @@
 
     
     {% if user.is_employee %}
-        {% if companypost.title|striptags|add:user.username|striptags in identifiers%}
-        <p>You already applied</p>
-        <a href="#">Unapply</a>
+        {% for application in applications %}
+            {% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
+                <p>You already applied</p>
+                <a href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
+                
+            {% endif %}
 
-        {% else %}
-        <a href="{% url 'posts:apply' pk=companypost.pk%}">Apply</a>
+        {% endfor %}
+        
+        {% if companypost.title|striptags|add:user.username|striptags not in identifiers %}
+            <a href="{% url 'posts:apply' pk=companypost.pk %}">Apply</a>
 
         {% endif %}
+        
             
     {% elif user.is_company %}
         <br>

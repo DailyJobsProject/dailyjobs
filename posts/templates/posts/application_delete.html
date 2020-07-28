@@ -6,8 +6,8 @@
         {% csrf_token %}
         {{ form|crispy }}
         <p>
-            Are you sure that you want unapply from: {{ application.title }}?
+            Are you sure that you want unapply from this job?
         </p>
-        <input type="submit" value="Delete"/>
+        <input type="submit" value="Unapply"/>
     </form>
 {% endblock %}
