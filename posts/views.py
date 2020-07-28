@@ -46,14 +46,14 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = CompanyPost
     template_name = 'posts/companypost_delete.html'
     context_object_name = 'posts'
-    success_url = reverse_lazy('startpage')
+    success_url = reverse_lazy('posts:list')
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = CompanyPost
     fields = ['title', 'description']
     template_name = 'posts/companypost_update.html'
     context_object_name = 'posts'
-    success_url = reverse_lazy('startpage')
+    success_url = reverse_lazy('posts:list')
 
 class ApplicationDeleteView(LoginRequiredMixin, DeleteView):
     model = Application

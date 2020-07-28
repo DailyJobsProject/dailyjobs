@@ -6,10 +6,14 @@ from django.urls import reverse_lazy
 from django.core.files import File
 
 class User(AbstractUser):
+    """user.is_company/is_employee are filled in backend through forms"""
+
     is_company = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
 
 class Company(models.Model):
+    """Company type user"""
+
     user = models.OneToOneField(User, primary_key=True, unique=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=254, unique=True)
     telephone = models.CharField(max_length=254)
@@ -24,6 +28,8 @@ class Company(models.Model):
 
 
 class Employee(models.Model):
+    """Employee type user"""
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, unique=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)

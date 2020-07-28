@@ -13,7 +13,7 @@ class CompanySignUpForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2', 'name', 'telephone']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs): # Removes helper text from UserCreationForm
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['username'].help_text = ''
         self.fields['password1'].help_text = ''
@@ -39,7 +39,7 @@ class EmployeeSignUpForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'telephone']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs): # Removes helper text from UserCreationForm
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['username'].help_text = ''
         self.fields['password1'].help_text = ''

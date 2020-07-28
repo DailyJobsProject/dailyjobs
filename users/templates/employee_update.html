@@ -1,7 +1,8 @@
-{% extends base.html %}
-
-{% block content %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
+
+<!-- Employee.about -->
+{% block content %}
 
   <form method="post">
     {% csrf_token %}

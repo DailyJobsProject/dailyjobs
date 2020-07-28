@@ -19,6 +19,8 @@ class LogInView(LoginView):
     template_name = 'registration/login.html'
 
 class CompanySignUpView(CreateView):
+    """SignUp view for Company-type user"""
+
     model = User
     form_class = CompanySignUpForm
     template_name = 'registration/company_signup_form.html'
@@ -34,22 +36,30 @@ class CompanySignUpView(CreateView):
         return redirect('/')
 
 class CompanyDetailView(LoginRequiredMixin, DetailView):
+    """Detail View for Company"""
+
     model = Company
     template_name = "company_detail.html"
 
 class CompanyUpdateView(LoginRequiredMixin, UpdateView):
+    """Updates Company.about"""
+
     login_url = 'accounts/login'
     model = Company
     fields = ['about']
     template_name = 'company_update.html'
 
 class CProfilePicUpdateView(LoginRequiredMixin, UpdateView):
+    """Updates Company.image (profile picture)"""
+
     login_url = 'accounts/login'
     model = Company
     fields = ['image']
     template_name = 'cprofilepic_update.html'
 
 class EmployeeSignUpView(CreateView):
+    """SignUp view for Employee-type user"""
+
     model = User
     form_class = EmployeeSignUpForm
     template_name = 'registration/employee_signup_form.html'
@@ -65,22 +75,30 @@ class EmployeeSignUpView(CreateView):
         return redirect('/')
 
 class EmployeeDetailView(LoginRequiredMixin, DetailView):
+    """Detail view for Employee"""
+
     model = Employee
     template_name = "employee_detail.html"
 
 class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
+    """Updates Employee.about"""
+    
     login_url = 'accounts/login'
     model = Employee
     fields = ['about']
     template_name = 'employee_update.html'
 
 class EProfilePicUpdateView(LoginRequiredMixin,UpdateView):
+    """Updates Employee.image (profile picture)"""
+
     login_url = 'accounts/login'
     model = Employee
     fields = ['image']
     template_name = 'eprofilepic_update.html'
 
 class CVUpdateView(LoginRequiredMixin,UpdateView):
+    """Updates Employee.cv"""
+
     login_url = 'accounts/login'
     model = Employee
     fields = ['cv']
