@@ -25,7 +25,7 @@
         <p>Applications</p>
         {% for application in applications %}
             {% if application.post|striptags == companypost.title|striptags %}
-                <a href="{% url 'users:employee_detail' pk=application.user.pk %}">{{application.name}}</a>
+                <a href="{% url 'users:employee_detail' pk=application.name.pk %}">{{application.name}}</a>
 
             {% endif %}
 

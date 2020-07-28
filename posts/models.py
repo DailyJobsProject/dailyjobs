@@ -4,6 +4,8 @@ from django.urls import reverse
 # Create your models here.
 
 from django.contrib.auth import get_user_model
+
+
 User = get_user_model()
 
 
@@ -28,3 +30,5 @@ class Application(models.Model):
 
     def get_absolute_url(self):
         return reverse('users:employee_detail', kwargs={'pk': self.pk})
+
+

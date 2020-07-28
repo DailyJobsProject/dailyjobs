@@ -1,7 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+
+
 from .forms import ApplicationForm
 
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
@@ -57,6 +60,7 @@ class ApplicationDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'applications'
     success_url = reverse_lazy('startpage')
 
+
 @login_required
 def post_apply(request, pk):
     post = get_object_or_404(CompanyPost, pk=pk)
@@ -74,3 +78,9 @@ def post_apply(request, pk):
         form = ApplicationForm()
 
     return render(request, 'posts/application_form.html', {'form': form})
+
+
+
+
+
+
