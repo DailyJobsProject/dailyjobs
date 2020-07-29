@@ -15,6 +15,7 @@ from .models import User, Company, Employee
 from rest_framework import viewsets
 from .serializers import CompanySerializer, EmployeeSerializer
 
+
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
@@ -43,6 +44,14 @@ class CompanyDetailView(LoginRequiredMixin, DetailView):
 
     model = Company
     template_name = "company_detail.html"
+
+    def get_context_data(self, **kwargs):
+        from django.apps import apps
+        CompanyPost = apps.get_model('posts', 'CompanyPost')
+
+        context = super(CompanyDetailView, self).get_context_data(**kwargs)
+        context["my_posts"] = CompanyPost.objects.all()
+        return context
 
 class CompanyUpdateView(LoginRequiredMixin, UpdateView):
     """Updates Company.about"""

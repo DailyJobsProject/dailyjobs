@@ -1,0 +1,17 @@
+p {
+    font-family: monospace;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.about-postlist  {
+    display: flex;
+    flex-direction: column;
+}
+
+.img_about {
+    display: flex;
+    justify-content: stretch;
+}

@@ -4,39 +4,58 @@
 {% block content %}
 
     {% if company.name == user.company.name %}
-        <!-- If the logged in Company is the owner of the currently accesed profile page,
-             fields can pe updated -->
-        <h2>@{{company.name}}</h2>
+      <!-- If the logged in Company is the owner of the currently accesed profile page,
+       fields can pe updated -->
 
-        <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
-        {% if company.image %} 
-            <img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
-            <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
-                <input type="submit" value="Change Profile Pic" />
+        <div class="container">
+          <ul class="img_about">
+            <li>
+              <h2>@{{company.name}}</h2>
+              
+              <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
+              {% if company.image %} 
+                  <img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
+                  <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
+                      <input type="submit" value="Change Profile Pic" />
+                  </form>
 
-        <!-- If user hasn't uploaded any profile pictures, a placeholder image will be fetched from static/users/user.png -->
-        {% else %}
-            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
-            <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
-                <input type="submit" value="Change Profile Pic" />
+              <!-- If user hasn't uploaded any profile pictures, a placeholder image will be fetched from static/users/user.png -->
+              {% else %}
+                  <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+                  <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
+                      <input type="submit" value="Change Profile Pic" />
+                  </form>
+              </div>
 
-        {% endif %}
-            </form>
+              {% endif %}
 
-        <!-- Companypost Create View -->
-        <h2><a href="{% url 'posts:create' %}">Create Post</a><br></h2>
+            <!--Company Description -->
+            <li>
+              <ul class="about-postlist">
 
-        <!--Current Company Posts List View -->
-        <h2><a href="{% url 'posts:list' %}">My posts</a></h2>
+                <li>
+                  <h2>About</h2>
+                  <p>{{company.about}}</p>
+                  <form action="{% url 'users:company_update' pk=user.pk%}">
+                    <input type="submit" value="Edit About" />
+                  </form>
+                </li>
 
-        <!--Company Description -->
-        <h2>About</h2>
-        {{company.about}}
-        <form action="{% url 'users:company_update' pk=user.pk%}">
-            <input type="submit" value="Edit About" />
-        </form>
+                <li>
+                  <!--Current Company Posts List View -->
+                  <h3>My job posts</h3>
+                  {% for post in my_posts %}
+                    <h4><a href="{% url 'posts:detail' pk=post.pk %}">{{post.title}}</a></h3>
+                  {% endfor %}
+                  <!-- Companypost Create View -->
+                    <h3><a class="btn btn-success" href="{% url 'posts:create' %}"><h4>Create Post</h4></a></h3>
+                </li>
 
-        <a href="{% url 'password_reset' %}">Password reset</a>
+              </ul>
+
+            </li>
+            
+          </ul>
 
     {% else %}
         <!-- Non updateable Company profile page -->
@@ -57,4 +76,5 @@
         {{company.about}}
 
     {% endif %}
+</div>
 {% endblock  %}

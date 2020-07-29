@@ -2,11 +2,11 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import ApplicationViewSet, CompanyPostViewSet
 from . import views
+
+
 router = routers.DefaultRouter()
 router.register(r'applications', ApplicationViewSet)
 router.register(r'company_posts', CompanyPostViewSet)
-
-
 
 app_name = 'posts'
 
