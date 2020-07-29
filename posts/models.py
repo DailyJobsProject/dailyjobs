@@ -32,4 +32,3 @@ class Application(models.Model):
     def get_absolute_url(self):
         return reverse('users:employee_detail', kwargs={'pk': self.pk})
 
-

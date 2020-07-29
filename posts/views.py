@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-
+from rest_framework import viewsets
 
 from .forms import ApplicationForm
 
@@ -11,6 +11,8 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView, D
 
 from .models import CompanyPost, Application
 from django.contrib.auth import get_user_model
+
+from .serializers import CompanyPostSerializer, ApplicationSerializer
 
 User = get_user_model()
 
@@ -82,3 +84,15 @@ def post_apply(request, pk):
         form = ApplicationForm()
 
     return render(request, 'posts/application_form.html', {'form': form})
+
+class CompanyPostViewSet(viewsets.ModelViewSet):
+    queryset = CompanyPost.objects.all().order_by('user')
+    serializer_class = CompanyPostSerializer
+
+
+
+
+class ApplicationViewSet(viewsets.ModelViewSet):
+    queryset = Application.objects.all().order_by('identifier')
+    serializer_class = ApplicationSerializer
+
