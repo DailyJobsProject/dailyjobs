@@ -12,6 +12,9 @@ from django.views.generic import (CreateView, TemplateView, DetailView,
 from .forms import CompanySignUpForm, EmployeeSignUpForm
 from .models import User, Company, Employee
 
+from rest_framework import viewsets
+from .serializers import CompanySerializer, EmployeeSerializer
+
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
@@ -103,3 +106,11 @@ class CVUpdateView(LoginRequiredMixin,UpdateView):
     model = Employee
     fields = ['cv']
     template_name = 'cv_update.html'
+
+class CompanyViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.all().order_by('name')
+    serializer_class = CompanySerializer
+
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all().order_by('user')
+    serializer_class = EmployeeSerializer
