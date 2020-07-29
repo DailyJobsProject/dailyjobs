@@ -6,6 +6,9 @@
     <p>Title: {{companypost.title}}</p>
     <p>Description: {{companypost.description}}</p>
     <p>Created at: {{companypost.created_at}}</p>
+    <p>Starts at: {{ companypost.start_date }} </p>
+    <p>Ends at: {{ companypost.end_date }}</p>
+
 
     {% if user.is_employee %}
         {% for application in applications %}

@@ -17,7 +17,7 @@ from .serializers import CompanyPostSerializer, ApplicationSerializer
 User = get_user_model()
 
 class PostCreateView(LoginRequiredMixin, CreateView):
-    fields = ('title', 'description')
+    fields = ('title', 'description', 'start_date', 'end_date')
     model = CompanyPost
 
     def form_valid(self, form):
@@ -52,7 +52,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = CompanyPost
-    fields = ['title', 'description']
+    fields = ['title', 'description','start_date', 'end_date']
     template_name = 'posts/companypost_update.html'
     context_object_name = 'posts'
     success_url = reverse_lazy('posts:list')
