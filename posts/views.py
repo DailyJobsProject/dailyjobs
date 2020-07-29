@@ -44,6 +44,24 @@ class PostListView(LoginRequiredMixin,ListView):
     context_object_name = 'posts'
     queryset = CompanyPost.objects.all()
 
+    def get_context_data(self, **kwargs):
+        context = super(PostListView , self).get_context_data(**kwargs)
+        context['applications'] = Application.objects.all()
+        context['identifiers'] = Application.objects.all().values_list('identifier', flat=True)
+        return context
+
+class EmployeeApplicationsListView(LoginRequiredMixin,ListView):
+    model= CompanyPost
+    template_name = 'posts/employee_applications_list.html'
+    context_object_name = 'posts'
+    queryset = CompanyPost.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeApplicationsListView, self).get_context_data(**kwargs)
+        context['applications'] = Application.objects.all()
+        context['identifiers'] = Application.objects.all().values_list('identifier', flat=True)
+        return context
+
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = CompanyPost
     template_name = 'posts/companypost_delete.html'

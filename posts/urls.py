@@ -11,11 +11,11 @@ router.register(r'company_posts', CompanyPostViewSet)
 app_name = 'posts'
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('rest_api/', include('rest_framework.urls', namespace='rest_framework')),
+    path('', views.PostListView.as_view()),
     path('new/', views.PostCreateView.as_view(), name='create'),
-    path('<int:pk>/', views.PostDetailView.as_view(), name = 'detail'),
-    path('list/', views.PostListView.as_view(), name = 'list'),
+    path('<int:pk>/', views.PostDetailView.as_view(), name ='detail'),
+    path('list/', views.PostListView.as_view(), name ='list'),
+    path('employee_applications/', views.EmployeeApplicationsListView.as_view(), name='employee_applications_list'),
     path('<int:pk>/post_delete/', views.PostDeleteView.as_view(), name='delete'),
     path('<int:pk>/post_update/', views.PostUpdateView.as_view(), name='update'),
     path('<int:pk>/apply/', views.post_apply, name='apply'),

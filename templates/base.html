@@ -31,7 +31,7 @@
                             {% if user.is_company %}
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="{% url 'users:company_detail' pk=user.pk %}"><span class="glyphicon glyphicon-user"></span>@{{user.username}}</a></li>
-                                <li><a href="{% url 'posts:list' %}">My Posts</a> </li>
+                                <li><a href="{% url 'posts:list' %}">My Posts</a></li>
                                 <li><a href="{% url 'logout' %}">Logout</a></li>
                             </ul>
                             {% endif %}
@@ -40,7 +40,8 @@
                             {% if user.is_employee %}
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="{% url 'users:employee_detail' pk=user.pk %}"><span class="glyphicon glyphicon-user"></span>@{{user.username}}</a></li>
-                                <li><a href="{% url 'posts:list' %}">Posts List</a></li>
+                                <li><a href="{% url 'posts:employee_applications_list' %}">My applications</a></li>
+                                <li><a href="{% url 'posts:list' %}">Job Offers</a> </li>
                                 <li><a href="{% url 'logout' %}">Logout</a></li>
                             </ul>
 

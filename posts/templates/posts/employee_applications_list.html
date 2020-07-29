@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+{% if user.is_employee %}
+<h3>Job offers</h3>
+
+{% for post in posts %}
+    {% for application in applications %}
+        {% if post.title|striptags|add:user.username|striptags == application.identifier|striptags %}
+            <ul>
+                <h3><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></h3>
+            </ul>
+
+        {% endif %}
+
+    {% endfor %}
+    
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

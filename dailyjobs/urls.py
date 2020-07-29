@@ -17,15 +17,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('users/', include(('users.urls', 'users'), namespace='users')),
-    path('posts/', include(('posts.urls', 'posts'), namespace='posts')),
-    path('', views.StartPage.as_view(), name='startpage'),
-    path('logged_out', views.LoggedOutPage.as_view(), name='logged_out')
+    path('', include(('posts.urls', 'posts'), namespace='posts')),
+    # path('logged_out', views.LoggedOutPage.as_view(), name='logged_out')
 ]
 
 if settings.DEBUG is True:

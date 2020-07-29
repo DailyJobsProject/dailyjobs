@@ -3,16 +3,24 @@
 {% block content %}
 
 {% if user.is_company %}
-    {% for posts in user.posts.all %}
-        <ul><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></ul>
+    <h3>My Job Posts</h3>
+
+    {% for posts in user.posts.all %}    
+        <ul>
+            <h4><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></h4>
+        </ul>
 
     {% endfor %}
+    <br>
+    <h3><a href="{% url 'posts:create' %}">Create Post</a><br></h3>
 
-{% endif %}
-
-{% if user.is_employee %}
+{% else %}
+    <h2>Job offers</h2>
+    
     {% for post in posts %}
-        <ul><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></ul>
+        <ul>
+            <h4><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></h4>
+        </ul>
 
     {% endfor %}
 

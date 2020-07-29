@@ -11,7 +11,7 @@ router.register(r'employees', EmployeeViewSet)
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('users/', include(router.urls)),
     path('rest_api/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('signup/', views.SignUpView.as_view(), name='signup'),
