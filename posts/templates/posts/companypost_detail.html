@@ -28,9 +28,9 @@
         {% endif %}
 
     {% elif user.is_company %}
-        <h3><a href="{% url 'posts:delete' pk=companypost.pk %}">Delete Post</a></h3>
-        <h3><a href="{% url 'posts:update' pk=companypost.pk %}">Update Post</a></h3>
-        <h3><a href="{% url 'posts:list' %}">Return to My Posts</a></h3>
+        <h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="btn btn-danger">Delete Post</a></h3>
+        <h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="btn btn-warning">Update Post</a></h3>
+        <h3><a href="{% url 'posts:list' %} ">Return to My Posts</a></h3>
         <p>Applications</p>
         {% for application in applications %}
             {% if application.post|striptags == companypost.title|striptags %}
