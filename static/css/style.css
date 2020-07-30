@@ -1,5 +1,5 @@
 p {
-    font-family: monospace;
+    font-family: Tahoma;
 }
 
 ul {
@@ -13,4 +13,23 @@ ul {
 
 .img_about {
     display: flex;
+}
+
+
+.description {
+    text-align: justify;
+}
+.created_at{
+    display: flex;
+    justify-content: space-between;
+}
+
+.job_duration {
+     display: flex;
+     justify-content: stretch;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
 }
