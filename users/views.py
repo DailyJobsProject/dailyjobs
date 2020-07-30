@@ -29,18 +29,18 @@ class SignUpView(TemplateView):
 class LogInView(LoginView):
     template_name = 'registration/login.html'
     
-    def get_context_data(self, **kwargs):
-        if user.is_company:
-            context = super().get_context_data(**kwargs)
-            logged_user = Company.objects.get(user=self.request.user)
-            context["next"] = reverse_lazy('users:company_detail', kwargs={'pk':self.pk})
-            return context
+    # def get_context_data(self, **kwargs):
+    #     if user.is_company:
+    #         context = super().get_context_data(**kwargs)
+    #         logged_user = Company.objects.get(user=self.request.user)
+    #         context["next"] = reverse_lazy('users:company_detail', kwargs={'pk':self.pk})
+    #         return context
 
-        elif request.user.is_employee:
-            context = super().get_context_data(**kwargs)
-            logged_user = Employee.objects.get(user=self.request.user)
-            context["next"] = reverse_lazy('users:employee_detail', kwargs={'pk':self.pk})
-            return context
+    #     elif request.user.is_employee:
+    #         context = super().get_context_data(**kwargs)
+    #         logged_user = Employee.objects.get(user=self.request.user)
+    #         context["next"] = reverse_lazy('users:employee_detail', kwargs={'pk':self.pk})
+    #         return context
 
     # def get_success_url(self):
     #     if request.user.is_company:
