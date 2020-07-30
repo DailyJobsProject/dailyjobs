@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
 from django.contrib.auth import login
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, TemplateView, DetailView, 
@@ -19,8 +19,44 @@ from .serializers import CompanySerializer, EmployeeSerializer
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
+    def get_succes_url(self, *args, **kwargs):
+        user = Profile.objects.get(user=self.request.user)
+        if user.is_company:
+            return reverse_lazy('users:company_detail', pk=user.pk)
+        elif user.is_employee:
+            return reverse('users:employee_detail', pk=user.pk)
+
 class LogInView(LoginView):
     template_name = 'registration/login.html'
+    
+    def get_context_data(self, **kwargs):
+        if user.is_company:
+            context = super().get_context_data(**kwargs)
+            logged_user = Company.objects.get(user=self.request.user)
+            context["next"] = reverse_lazy('users:company_detail', kwargs={'pk':self.pk})
+            return context
+
+        elif request.user.is_employee:
+            context = super().get_context_data(**kwargs)
+            logged_user = Employee.objects.get(user=self.request.user)
+            context["next"] = reverse_lazy('users:employee_detail', kwargs={'pk':self.pk})
+            return context
+
+    # def get_success_url(self):
+    #     if request.user.is_company:
+    #         logged_user = Company.objects.get(user=self.request.user)
+    #         return reverse_lazy('users:company_detail', kwargs={'pk':self.pk})
+
+    #     elif request.user.is_employee:
+    #         logged_user = Employee.objects.get(user=self.request.user)
+    #         return reverse('users:employee_detail', kwargs={'pk':self.pk})
+        
+
+    # def get_redirect_url(self, *args, **kwargs):
+    #     user = Profile.objects.get(user=self.request.user)
+
+class LogOutView(LogoutView):
+    next_page = 'registration/logged_out.html'
 
 class CompanySignUpView(CreateView):
     """SignUp view for Company-type user"""
@@ -38,6 +74,9 @@ class CompanySignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('/')
+
+    def get_absolute_url(self):
+        return reverse("users:company_detail", kwargs={'pk':self.pk})
 
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     """Detail View for Company"""
@@ -86,11 +125,24 @@ class EmployeeSignUpView(CreateView):
         login(self.request, user)
         return redirect('/')
 
+    def get_absolute_url(self):
+        return reverse("users:employee_detail", kwargs={'pk':self.pk})    
+
 class EmployeeDetailView(LoginRequiredMixin, DetailView):
     """Detail view for Employee"""
 
     model = Employee
     template_name = "employee_detail.html"
+
+    def get_context_data(self, **kwargs):
+        from django.apps import apps
+        Application = apps.get_model('posts', 'Application')
+        CompanyPost = apps.get_model('posts', 'CompanyPost')
+
+        context = super(EmployeeDetailView, self).get_context_data(**kwargs)
+        context["my_applications"] =  Application.objects.all()
+        context["posts"] = CompanyPost.objects.all()
+        return context
 
 class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     """Updates Employee.about"""

@@ -15,9 +15,9 @@
         {% for application in applications %}
             {% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
                 <p>You already applied</p>
-                
+
                 <a href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
-                
+
             {% endif %}
 
         {% endfor %}

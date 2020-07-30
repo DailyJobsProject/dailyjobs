@@ -11,11 +11,12 @@ router.register(r'employees', EmployeeViewSet)
 
 
 urlpatterns = [
-    path('users/', include(router.urls)),
+    path('', include(router.urls)),
     path('rest_api/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('signup/', views.SignUpView.as_view(), name='signup'),
     path('login/', views.LogInView.as_view(), name= 'login'),
+    path('logout/', views.LogOutView.as_view(), name='logged_out'),
     path('signup/company', views.CompanySignUpView.as_view(), name='company_signup'),
     path('signup/employee', views.EmployeeSignUpView.as_view(), name='employee_signup'),
 
@@ -26,5 +27,5 @@ urlpatterns = [
     path('employee/<int:pk>', views.EmployeeDetailView.as_view(), name='employee_detail'),
     path('employee/<int:pk>/edit/', views.EmployeeUpdateView.as_view(), name='employee_update'),
     path('employee/<int:pk>/profile_pic/edit', views.EProfilePicUpdateView.as_view(), name='eprofilepic_update'),
-    path('employee/<int:pk>/cv/edit', views.CVUpdateView.as_view(), name='cv_update')
+    path('employee/<int:pk>/cv/edit', views.CVUpdateView.as_view(), name='cv_update'),
 ]

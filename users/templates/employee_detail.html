@@ -5,42 +5,66 @@
 {% block content %}
 
 {% if employee.user == user.employee.user %}
+  <!-- If the logged in Company is the owner of the currently accesed profile page,
+    fields can pe updated -->
+  
+  <div class="container">
+    <ul class="img_about">
+      <li>
+        <h2>@{{employee.user}}</h2>
+          
+        <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
+        {% if employee.image %}
+            <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
+            <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
+                <input type="submit" value="Change Profile Pic" />
+            </form>
+        
+        <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
+        {% else %}
+            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+            <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
+                <input type="submit" value="Change Profile Pic" />
+            </form>
 
-    <h2>@{{employee.user}}</h2>
+        {% endif %}
+      </li>
 
-    <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
-    {% if employee.image %}
-        <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
-        <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
-            <input type="submit" value="Change Profile Pic" />
-        </form>
-    
-    <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
-    {% else %}
-        <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
-        <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
-            <input type="submit" value="Change Profile Pic" />
-        </form>
+      <!-- Employee description -->
+      <li>
+        <ul class="about-postlist">
 
-    {% endif %}
-    
-    <h4><a href="{% url 'posts:list' %}">My Applications</a></h4>
+          <li>
+            <h2>About</h2>
+            <p>{{employee.about}}</p>
+            <form action="{% url 'users:employee_update' pk=user.pk%}">
+                <input type="submit" value="Edit About" />
+            </form>
+          </li>
 
-    <!-- Employee description -->
-    <h2>About</h2>
-    {{employee.about}}
+          <li>
+          <!-- If there the user uploaded a CV, it will be fetched from media/CVs -->
+          {% if employee.cv %}
+              <a href="{{ employee.cv.url }}">CV</a>
 
-    <form action="{% url 'users:employee_update' pk=user.pk%}">
-        <input type="submit" value="Edit About" />
-    </form>
+              <form action="{% url 'users:cv_update' pk=user.pk %}">
+                  <input type="submit" value="Upload CV" />
+              </form>
+          </li>
 
-    <!-- If there the user uploaded a CV, it will be fetched from media/CVs -->
-    {% if employee.cv %}
-        <a href="{{ employee.cv.url }}">CV</a>
+          <li>
+            <h3>My job applications</h3>
+            {% for post in posts %}
+              {% for application in my_applications %}
+                  {% if post.title|striptags|add:user.username|striptags == application.identifier|striptags %}
+                        <h4><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></h4>
 
-        <form action="{% url 'users:cv_update' pk=user.pk %}">
-            <input type="submit" value="Upload CV" />
-        </form>
+                  {% endif %}
+
+              {% endfor %}
+              
+            {% endfor %}
+          </li>
 
     {% else %}
         <p>CV not uploaded</p>

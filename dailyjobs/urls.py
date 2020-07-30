@@ -21,9 +21,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('users/', include(('users.urls', 'users'), namespace='users')),
-    path('', include(('posts.urls', 'posts'), namespace='posts')),
-    # path('logged_out', views.LoggedOutPage.as_view(), name='logged_out')
+    path('posts/', include(('posts.urls', 'posts'), namespace='posts')),
+    path('', include(('users.urls', 'users'), namespace='users')),
 ]
 
 if settings.DEBUG is True:
