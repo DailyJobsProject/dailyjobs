@@ -2,34 +2,44 @@
 
 {% block content %}
 
-    <p>Author: {{ companypost.user }}</p>
-    <p>PK: {{ companypost.pk }}</p>
-    <p>Title: {{companypost.title}}</p>
-    <p>Description: {{companypost.description}}</p>
-    <p>Created at: {{companypost.created_at}}</p>
-    <p>Starts at: {{ companypost.start_date }} </p>
-    <p>Ends at: {{ companypost.end_date }}</p>
+   <div class="container">
+     <ul class="title-user" >
+        <li> <h2> {{ companypost.title }}</h2></li>
+        <li> <a href=" users:company_detail "> <h3> Created by: {{ companypost.user }} </h3> </a> </li>
+        <li> <h4 class="description"> Job Description:  <p>{{companypost.description}}</p></h4> </li>
+     </ul>
+   <ul class="created_at" >
+             <li><p>{{ companypost.created_at }}</p> </li>
+             <li><p>Job duration: {{ companypost.start_date }} - {{ companypost.end_date }}</p></li>
+   </ul>
 
 
-    {% if user.is_employee %}
+     {% if user.is_employee %}
         {% for application in applications %}
             {% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
                 <p>You already applied</p>
-                
+
                 <a href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
-                
+
             {% endif %}
 
         {% endfor %}
-        
+
         {% if companypost.title|striptags|add:user.username|striptags not in identifiers %}
             <a href="{% url 'posts:apply' pk=companypost.pk %}">Apply</a>
 
         {% endif %}
 
     {% elif user.is_company %}
-        <h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="btn btn-danger">Delete Post</a></h3>
-        <h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="btn btn-warning">Update Post</a></h3>
+       <ul class="buttons">
+           <li>
+               <h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="btn btn-danger">Delete Post</a></h3>
+           </li>
+           <li>
+                <h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="btn btn-warning">Update Post</a></h3>
+           </li>
+       </ul>
+
         <h3><a href="{% url 'posts:list' %} ">Return to My Posts</a></h3>
         <p>Applications</p>
         {% for application in applications %}
@@ -41,5 +51,7 @@
         {% endfor %}
 
     {% endif %}
+
+    </div>
 
 {% endblock  %}
