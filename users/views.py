@@ -1,6 +1,8 @@
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
@@ -19,41 +21,22 @@ from .serializers import CompanySerializer, EmployeeSerializer
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
-    def get_succes_url(self, *args, **kwargs):
-        user = Profile.objects.get(user=self.request.user)
-        if user.is_company:
-            return reverse_lazy('users:company_detail', pk=user.pk)
-        elif user.is_employee:
-            return reverse('users:employee_detail', pk=user.pk)
-
 class LogInView(LoginView):
     template_name = 'registration/login.html'
-    
-    # def get_context_data(self, **kwargs):
-    #     if user.is_company:
-    #         context = super().get_context_data(**kwargs)
-    #         logged_user = Company.objects.get(user=self.request.user)
-    #         context["next"] = reverse_lazy('users:company_detail', kwargs={'pk':self.pk})
-    #         return context
 
-    #     elif request.user.is_employee:
-    #         context = super().get_context_data(**kwargs)
-    #         logged_user = Employee.objects.get(user=self.request.user)
-    #         context["next"] = reverse_lazy('users:employee_detail', kwargs={'pk':self.pk})
-    #         return context
+@login_required
+def user_redirect(request):
+    """
+    VERY IMPORTANT! It is used in registration/login.html to
+       redirect the user to his profile.
+    """
+    if request.user.is_company:
+        url = reverse('users:company_detail', kwargs={'pk':request.user.pk})
+        return HttpResponseRedirect(url)
 
-    # def get_success_url(self):
-    #     if request.user.is_company:
-    #         logged_user = Company.objects.get(user=self.request.user)
-    #         return reverse_lazy('users:company_detail', kwargs={'pk':self.pk})
-
-    #     elif request.user.is_employee:
-    #         logged_user = Employee.objects.get(user=self.request.user)
-    #         return reverse('users:employee_detail', kwargs={'pk':self.pk})
-        
-
-    # def get_redirect_url(self, *args, **kwargs):
-    #     user = Profile.objects.get(user=self.request.user)
+    elif request.user.is_employee:
+        url = reverse('users:employee_detail', kwargs={'pk':request.user.pk})
+        return HttpResponseRedirect(url)
 
 class LogOutView(LogoutView):
     next_page = 'registration/logged_out.html'

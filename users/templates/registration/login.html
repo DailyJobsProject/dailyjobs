@@ -2,10 +2,6 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-    {% if form.errors %}
-        <p>Wrong credentials or your username and password didn't match. Please try again.</p>
-    {% endif %}
-
     {% if next %}
         {% if user.is_authenticated %}
             <p>Your account doesn't have access to this page. To proceed,
@@ -14,14 +10,14 @@
             <p>Please login to see this page.</p>
         {% endif %}
     {% endif %}
-    
-    
+
     <form method="post" action="{% url 'login' %}"><br>
         {% csrf_token %}
+        
         {{ form|crispy }}
         <br>
         <input type="submit" value="Login"/>
-        <input type="hidden" name="next" value="{{ next }}"/>
+        <input type="hidden" name="next" value="{%  url 'users:userredirect' %}"/>
     </form>
 
     {# Assumes you setup the password_reset view in your URLconf #}
