@@ -49,7 +49,6 @@ class CompanySignUpView(CreateView):
     model = User
     form_class = CompanySignUpForm
     template_name = 'registration/company_signup_form.html'
-    success_url = reverse_lazy('')
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'company'
@@ -99,7 +98,6 @@ class EmployeeSignUpView(CreateView):
     model = User
     form_class = EmployeeSignUpForm
     template_name = 'registration/employee_signup_form.html'
-    success_url = reverse_lazy('/')
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'employee'
@@ -134,7 +132,7 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     
     login_url = 'accounts/login'
     model = Employee
-    fields = ['about']
+    fields = ['about', 'contact_info', 'image']
     template_name = 'employee_update.html'
 
 class EProfilePicUpdateView(LoginRequiredMixin,UpdateView):
@@ -160,3 +158,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all().order_by('user')
     serializer_class = EmployeeSerializer
+
+class WelcomePage(TemplateView):
+    template_name = 'welcome.html'

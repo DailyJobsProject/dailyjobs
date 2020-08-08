@@ -3,11 +3,11 @@
 
 <!-- Employee.image -->
 {% block content %}
-
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-success">Update</button>
-  </form>
-
+  <div class="container" style="margin-top: 20;">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-success">Update</button>
+    </form>
+  </div>
 {% endblock %}

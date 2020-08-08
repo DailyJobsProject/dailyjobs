@@ -1,58 +1,76 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
-   <div class="container">
-     <ul class="title-user" >
-         <li> <h2> {{ companypost.title }}</h2></li>
+  <div class="container">
+			<p class="top-margin" style="color: #B8B8B8;">
+				Published on: {{ companypost.created_at }}
+			</p>
+			<br>
 
+		<ul class="flex flex-column">
+			<li>
+				<h2 style="margin: 0"> {{ companypost.title }}</h2>
 
-         <li><a href="{% url 'users:company_detail' pk=company.pk %}" > <h3> Created by: {{ companypost.user }} </h3> </a></li>
+				{% for company in companies %}
+						{% if companypost.user|striptags ==  company.user|striptags %}
+								<h4>by <a href="{% url 'users:company_detail' pk=company.user.pk %}">@{{ companypost.user.company.name }}</a></h4>
+						<br>
+			
+						{% endif %}
+								
+				{% endfor %}
+			</li>
 
+			<li>
+				<p class="job-description" >{{companypost.description}}</p>
+				<br>
+				<p>Between: {{ companypost.start_date }} - {{ companypost.end_date }}</p>
+				<br>
+				{% if user.is_employee %}
+						{% for application in applications %}
+								{% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
+										<p>You applied for this job</p>
 
-         <li> <h4 class="description"> Job Description:  <p>{{companypost.description}}</p></h4> </li>
-     </ul>
-   <ul class="created_at" >
-             <li><p>{{ companypost.created_at }}</p> </li>
-             <li><p>Job duration: {{ companypost.start_date }} - {{ companypost.end_date }}</p></li>
-   </ul>
+										<a href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
 
+								{% endif %}
 
-     {% if user.is_employee %}
-        {% for application in applications %}
-            {% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
-                <p>You already applied</p>
+						{% endfor %}
 
-                <a href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
+						{% if companypost.title|striptags|add:user.username|striptags not in identifiers %}
+								<a href="{% url 'posts:apply' pk=companypost.pk %}">Apply</a>
 
-            {% endif %}
+						{% endif %}
+				
+				{% elif user.is_company %}
+						
+					<h3>Applications</h3>
 
-        {% endfor %}
+					{% if application.post not in post_titles %}
+						<p>Nobody applied yet</p>
 
-        {% if companypost.title|striptags|add:user.username|striptags not in identifiers %}
-            <a href="{% url 'posts:apply' pk=companypost.pk %}">Apply</a>
+					{% endif %}
 
-        {% endif %}
+					{% for application in applications %}
+							
+						{% if application.post|striptags == companypost.title|striptags %}
+							<a href="{% url 'users:employee_detail' pk=application.name.pk %}">{{application.name}}</a>
+						
+						{% endif %}
 
-    {% elif user.is_company %}
-       <ul class="buttons">
-           <li>
-               <h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="btn btn-danger">Delete Post</a></h3>
-           </li>
-           <li>
-                <h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="btn btn-warning">Update Post</a></h3>
-           </li>
-       </ul>
+					{% endfor %}
 
-        <h3><a href="{% url 'posts:list' %} ">Return to My Posts</a></h3>
-        <p>Applications</p>
-        {% for application in applications %}
-            {% if application.post|striptags == companypost.title|striptags %}
-                <a href="{% url 'users:employee_detail' pk=application.name.pk %}">{{application.name}}</a>
+					<div class="buttons">
+						<h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="btn btn-danger">Delete Post</a></h3>
+						<h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="btn btn-warning">Update Post</a></h3>
+					
+					</div>
+		</li>
+		</ul>
 
-            {% endif %}
-
-        {% endfor %}
+			<h3 style="margin-top: 100px"><a href="{% url 'posts:list' %} ">Return to Job Offers</a></h3>
 
     {% endif %}
 

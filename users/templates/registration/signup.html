@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% block content %}
-<div class="form">
-    <h1>Sign Up as:</h1>
-    <div class="buttons-signup">
-        <a href="{% url 'users:company_signup' %}" > <button class="company-btn":style="margin:5px"> Company  </button> </a>
-        <a href="{% url 'users:employee_signup' %}"> <button class="employee-btn":style="margin:5px"> Employee </button> </a>
-    </div>
-
-
+<div class="form flex flex-column">
+	<h1 style="margin-left: 100px; margin-top: 60px;">Sign Up as:</h1>
+	<div class="flex signup-div" style="margin-top: 30px;">
+			<a style="margin-left: 0;" href="{% url 'users:company_signup' %}" ><button class="signup-btn">Company</button></a>
+			<a href="{% url 'users:employee_signup' %}"><button class="signup-btn">Employee</button></a>
+	</div>
 </div>
 
 {% endblock %}

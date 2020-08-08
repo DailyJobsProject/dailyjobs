@@ -1,48 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 p {
-    font-family: Tahoma;
+    font-family: monospace;
 }
 
 ul {
     list-style-type: none;
+    padding-right: 40px;
+    
 }
 
-.about-postlist  {
+.flex {
     display: flex;
+
+}
+
+.flex > li {
+    padding-right: 40px;
+}
+
+.flex-column  {
     flex-direction: column;
 }
-
-.img_about {
-    display: flex;
-}
-
 
 .description {
     text-align: justify;
 }
-.created_at{
-    display: flex;
-    justify-content: space-between;
-}
-
-.job_duration {
-     display: flex;
-     justify-content: stretch;
-}
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+}
+
+
+html, body {
+    height: 100%;
+}
+
+#content {
+    min-height: 100%;
+}
+
+#main {
+    overflow: auto;
+    padding-bottom: 200px;
+}
+
+#footer {
+    background-color: #101010;
+    position: relative;
+    height: 70px;
+    margin-top: -70px;
+    clear: both;
 }
 
 .form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -150px 0 0 -150px;
-    width:300px;
-    height:300px;
+    margin: auto;
+    width: 400px;
+    padding: 10px;
 }
-.login{
+
+.auth-btns{
     color: white;
     padding:  10px 24px;
     background-color:  #00b300;
@@ -50,39 +70,24 @@ ul {
     width: 100%;
     height: 100%;
 }
+
 .signup-btn{
-color: white;
-    padding:  10px 24px;
-    background-color:  #00b300;
-    border-radius: 8px;
-    width: 100%;
-    height: 100%;
-}
-.form p.space-button{
-    display: inline;
-    margin-right: 10px;
-}
-.buttons-signup{
-    display: flex;
-
-
-}
-
-.company-btn{
-    margin-right: 10px;
     color: white;
     background-color: #1aa3ff;
     padding:  10px 24px;
     border-radius: 8px;
     width: 100%;
     height: 100%;
+    font-family: monospace;
+    font-size: x-large;
+    height: 2cm;
+    width: 5cm;
 }
 
-.employee-btn{
-    color: white;
-    padding:  10px 24px;
-    background-color: #1aa3ff;
-    border-radius: 8px;
-    width: 100%;
-    height: 100%;
+.signup-div > a{
+    margin-left: 20px;
+}
+
+.top-margin {
+    margin-top: 40px;
 }

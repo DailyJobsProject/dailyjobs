@@ -32,14 +32,19 @@ class PostDetailView(DetailView):
     template_name = 'posts/companypost_detail.html'
 
     def get_context_data(self, **kwargs):
+        from django.apps import apps
+        Companies = apps.get_model('users', 'Company')
+
         context = super(PostDetailView , self).get_context_data(**kwargs)
         context['applications'] = Application.objects.all()
         context['all_applicants'] = Application.objects.all().values_list('name', flat=True)
         context['identifiers'] = Application.objects.all().values_list('identifier', flat=True)
+        context['companies'] = Companies.objects.all()
+        context['post_titles'] = CompanyPost.objects.all().values_list('title', flat=True)
         return context
 
 
-class PostListView(LoginRequiredMixin,ListView):
+class PostListView(ListView):
     model= CompanyPost
     template_name = 'posts/companypost_list.html'
     context_object_name = 'posts'

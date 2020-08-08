@@ -14,7 +14,8 @@ router.register(r'applications', ApplicationViewSet)
 router.register(r'company_posts', CompanyPostViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', views.WelcomePage.as_view(), name='welcome'),
+    path('rest/', include(router.urls)),
     path('rest_api/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('signup/', views.SignUpView.as_view(), name='signup'),

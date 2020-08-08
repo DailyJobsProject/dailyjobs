@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
 
+<div class="container" style="margin-top: 20;">
 {% if employee.user == user.employee.user %}
   <!-- If the logged in Company is the owner of the currently accesed profile page,
     fields can pe updated -->
-  
-  <div class="container">
-    <ul class="img_about">
+    <ul class="flex">
       <li>
         <h2>@{{employee.user}}</h2>
           
@@ -32,26 +30,36 @@
 
       <!-- Employee description -->
       <li>
-        <ul class="about-postlist">
+        <ul class="flex flex-column">
 
           <li>
             <h2>About</h2>
-            <p>{{employee.about}}</p>
+            <p>{{ employee.about }}</p>
             <form action="{% url 'users:employee_update' pk=user.pk%}">
                 <input type="submit" value="Edit About" />
             </form>
+            <br><br>
           </li>
-
+          
           <li>
-          <!-- If there the user uploaded a CV, it will be fetched from media/CVs -->
-          {% if employee.cv %}
-              <a href="{{ employee.cv.url }}">CV</a>
+            <!-- If there the user uploaded a CV, it will be fetched from media/CVs -->
+            {% if employee.cv %}
+                <h3><a href="{{ employee.cv.url }}">{{ employee.user.username }}'s CV</a></h3>
+                <form action="{% url 'users:cv_update' pk=user.pk %}">
+                    <input style="margin-top: 10px;" type="submit" value="Upload CV" />
+                </form>
+                <br><br>
 
+            {% else %}
+              <p>CV not uploaded</p>
+      
               <form action="{% url 'users:cv_update' pk=user.pk %}">
                   <input type="submit" value="Upload CV" />
               </form>
-          </li>
 
+            {% endif %}
+          </li>
+          <p>Telephone: {{ employee.telephone }}</p>
           <li>
             <h3>My job applications</h3>
             {% for post in posts %}
@@ -64,33 +72,52 @@
               {% endfor %}
               
             {% endfor %}
+
           </li>
 
-    {% else %}
-        <p>CV not uploaded</p>
+        </ul>
 
-        <form action="{% url 'users:cv_update' pk=user.pk %}">
-            <input type="submit" value="Upload CV" />
-        </form>
+      </li>
 
-    {% endif %}
-
-
+    </ul>  
 {% else %}
     <!-- Non updateable Employee profile page -->
-    <h2>@{{employee.user}}</h2>
+    <ul class="flex">
+      <li>
+        <h2>@{{employee.user}}</h2>
 
-    {% if employee.image %}
-        <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
+        {% if employee.image %}
+            <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
 
-    {% else %}
-        <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+        {% else %}
+            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
 
-    {% endif %}
+        {% endif %}
+        <br>
+      </li>
 
-    <h2>About</h2>
-    {{employee.about}}
+      <li>
+        <ul class="flex flex-column">
+          <h2>About</h2>
+          {{employee.about}}
+          
+          <h3 class="top-margin">Telephone: {{ employee.telephone }}</h3>
+          
+          {% if employee.cv %}
+            <h3 class="top-margin"><a href="{{ employee.cv.url }}">{{ employee.user.username }}'s CV</a></h3>
+          <br>
+          {% else %}
+            <p>CV not uploaded</p>
+
+          {% endif %}
+        </ul>
+
+      </li>
+
+    </ul>
 
 {% endif %}
+
+</div>
 
 {% endblock  %}

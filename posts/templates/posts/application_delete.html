@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
-{% block content %}
-
 {% load crispy_forms_tags %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <p>
-            Are you sure that you want unapply from this job?
-        </p>
-        <input type="submit" class="btn btn-warning" value="Unapply"/>
-    </form>
+
+{% block content %}
+	<div class="container" style="margin-top: 20;">
+		<form action="" method="post">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<p>
+				Are you sure that you want unapply from this job?
+			</p>
+			<input type="submit" class="btn btn-warning" value="Unapply"/>
+		</form>
+	</div>
 {% endblock %}
+

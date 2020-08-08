@@ -17,7 +17,7 @@ class Company(models.Model):
     user = models.OneToOneField(User, primary_key=True, unique=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=254, unique=True)
     telephone = models.CharField(max_length=254)
-    about = models.TextField(max_length=1000, default='No description')
+    about = models.TextField(max_length=1000, default='No description available')
     image = models.ImageField(upload_to='profile_pics')
 
     def __str__(self):
@@ -25,7 +25,6 @@ class Company(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy('users:company_detail', kwargs={'pk': self.pk})
-
 
 class Employee(models.Model):
     """Employee type user"""
@@ -37,10 +36,10 @@ class Employee(models.Model):
     about = models.TextField(max_length=1000, default='Tell us something about you')
     image = models.ImageField(upload_to='profile_pics')
     cv = models.FileField(upload_to='CVs')
+    contact_info = models.TextField(max_length=1000, default='No social media available.')
 
     def __str__(self):
         return self.user
 
     def get_absolute_url(self):
         return reverse_lazy('users:employee_detail', kwargs={'pk': self.pk})
-

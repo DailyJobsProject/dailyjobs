@@ -1,29 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+    {% if user.is_authenticated %}
+        <h3>Job Offers</h3>
 
-{% if user.is_company %}
-    <h3>My Job Posts</h3>
+        {% for post in posts %}
+              <h4><a href="{% url 'posts:detail' pk=post.pk %}">{{post.title}}</a></h3>
 
-    {% for posts in user.posts.all %}    
-        <ul>
-            <h4><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></h4>
-        </ul>
+        {% endfor %}
 
-    {% endfor %}
-    <br>
+    {% endif %}
+
+    {% if user.is_company %}
     <h3><a href="{% url 'posts:create' %} " class="btn btn-success">Create Post</a><br></h3>
 
-{% else %}
-    <h2>Job offers</h2>
+    {% endif %}
     
-    {% for post in posts %}
-        <ul>
-            <h4><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></h4>
-        </ul>
-
-    {% endfor %}
-
-{% endif %}
-
+</div>
 {% endblock %}

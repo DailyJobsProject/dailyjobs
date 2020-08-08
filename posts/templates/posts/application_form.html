@@ -2,12 +2,12 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-    <h4>Are you sure you want to apply on this job?</h4>
-    <form id='postForm' method="POST">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <input type="submit" value="Apply" class="btn btn-success">
-    </form>
-
+	<div class="container" style="margin-top: 20;">
+		<h4>Are you sure you want to apply on this job?</h4>
+		<form id='postForm' method="POST">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<input type="submit" value="Apply" class="btn btn-success">
+		</form>
+	</div>
 {% endblock  %}
