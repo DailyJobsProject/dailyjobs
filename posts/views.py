@@ -38,6 +38,7 @@ class PostDetailView(DetailView):
         context['identifiers'] = Application.objects.all().values_list('identifier', flat=True)
         return context
 
+
 class PostListView(LoginRequiredMixin,ListView):
     model= CompanyPost
     template_name = 'posts/companypost_list.html'

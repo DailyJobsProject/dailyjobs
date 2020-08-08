@@ -4,9 +4,13 @@
 
    <div class="container">
      <ul class="title-user" >
-        <li> <h2> {{ companypost.title }}</h2></li>
-        <li> <a href=" users:company_detail "> <h3> Created by: {{ companypost.user }} </h3> </a> </li>
-        <li> <h4 class="description"> Job Description:  <p>{{companypost.description}}</p></h4> </li>
+         <li> <h2> {{ companypost.title }}</h2></li>
+
+
+         <li><a href="{% url 'users:company_detail' pk=company.pk %}" > <h3> Created by: {{ companypost.user }} </h3> </a></li>
+
+
+         <li> <h4 class="description"> Job Description:  <p>{{companypost.description}}</p></h4> </li>
      </ul>
    <ul class="created_at" >
              <li><p>{{ companypost.created_at }}</p> </li>

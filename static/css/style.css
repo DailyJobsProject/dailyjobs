@@ -33,3 +33,56 @@ ul {
     display: flex;
     justify-content: space-between;
 }
+
+.form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    width:300px;
+    height:300px;
+}
+.login{
+    color: white;
+    padding:  10px 24px;
+    background-color:  #00b300;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+}
+.signup-btn{
+color: white;
+    padding:  10px 24px;
+    background-color:  #00b300;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+}
+.form p.space-button{
+    display: inline;
+    margin-right: 10px;
+}
+.buttons-signup{
+    display: flex;
+
+
+}
+
+.company-btn{
+    margin-right: 10px;
+    color: white;
+    background-color: #1aa3ff;
+    padding:  10px 24px;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+.employee-btn{
+    color: white;
+    padding:  10px 24px;
+    background-color: #1aa3ff;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+}

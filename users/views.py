@@ -4,6 +4,8 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
+from django.urls import reverse_lazy, reverse
+
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 
@@ -59,7 +61,7 @@ class CompanySignUpView(CreateView):
         return redirect('/')
 
     def get_absolute_url(self):
-        return reverse("users:company_detail", kwargs={'pk':self.pk})
+        return reverse("users:company_detail", kwargs={'pk': self.pk})
 
 class CompanyDetailView(LoginRequiredMixin, DetailView):
     """Detail View for Company"""

@@ -4,9 +4,7 @@ from .views import ApplicationViewSet, CompanyPostViewSet
 from . import views
 
 
-router = routers.DefaultRouter()
-router.register(r'applications', ApplicationViewSet)
-router.register(r'company_posts', CompanyPostViewSet)
+
 
 app_name = 'posts'
 
@@ -19,5 +17,5 @@ urlpatterns = [
     path('<int:pk>/post_delete/', views.PostDeleteView.as_view(), name='delete'),
     path('<int:pk>/post_update/', views.PostUpdateView.as_view(), name='update'),
     path('<int:pk>/apply/', views.post_apply, name='apply'),
-    path('<int:pk>/application_delete/', views.ApplicationDeleteView.as_view(), name='application_delete')
+    path('<int:pk>/application_delete/', views.ApplicationDeleteView.as_view(), name='application_delete'),
 ]

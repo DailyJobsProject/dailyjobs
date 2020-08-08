@@ -1,4 +1,6 @@
 from django.urls import path, include
+
+from posts.views import ApplicationViewSet, CompanyPostViewSet
 from . import views
 from rest_framework import routers
 from .views import CompanyViewSet, EmployeeViewSet
@@ -8,7 +10,8 @@ app_name = 'users'
 router = routers.DefaultRouter()
 router.register(r'companies', CompanyViewSet)
 router.register(r'employees', EmployeeViewSet)
-
+router.register(r'applications', ApplicationViewSet)
+router.register(r'company_posts', CompanyPostViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -10,17 +10,18 @@
             <p>Please login to see this page.</p>
         {% endif %}
     {% endif %}
-
-    <form method="post" action="{% url 'login' %}"><br>
+<div class="form">
+<form method="post" action="{% url 'login' %}"><br>
         {% csrf_token %}
-        
         {{ form|crispy }}
         <br>
-        <input type="submit" value="Login"/>
+        <button class="login" type="submit" value="Login">Login </button>
         <input type="hidden" name="next" value="{%  url 'users:userredirect' %}"/>
-    </form>
+</form>
 
     {# Assumes you setup the password_reset view in your URLconf #}
     {#<p><a href="{% url 'password_reset' %}">Lost password?</a></p>#}
 
 {% endblock %}
+
+</div>
