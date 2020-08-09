@@ -33,4 +33,5 @@ urlpatterns = [
     path('employee/<int:pk>/edit/', views.EmployeeUpdateView.as_view(), name='employee_update'),
     path('employee/<int:pk>/profile_pic/edit', views.EProfilePicUpdateView.as_view(), name='eprofilepic_update'),
     path('employee/<int:pk>/cv/edit', views.CVUpdateView.as_view(), name='cv_update'),
+    path('employee/<int:pk>/contact_info/edit', views.EmployeeContactUpdateView.as_view(), name='contact_info'),
 ]

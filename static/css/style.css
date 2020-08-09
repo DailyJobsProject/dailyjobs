@@ -91,3 +91,12 @@ html, body {
 .top-margin {
     margin-top: 40px;
 }
+.site-description{
+    display:flex;
+    margin-left: 20px;
+    flex-direction: column;
+}
+
+.text-description{
+    text-align: center;
+}

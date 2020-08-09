@@ -158,6 +158,12 @@ class CompanyViewSet(viewsets.ModelViewSet):
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all().order_by('user')
     serializer_class = EmployeeSerializer
+class EmployeeContactUpdateView(LoginRequiredMixin, UpdateView):
+    """Updates Employee.contact"""
+    login_url = 'accounts/login'
+    model = Employee
+    fields = ['contact_info']
+    template_name = 'contact_info_update.html'
 
 class WelcomePage(TemplateView):
     template_name = 'welcome.html'

@@ -39,6 +39,14 @@
                 <input type="submit" value="Edit About" />
             </form>
             <br><br>
+
+               <h2>Contact info </h2>
+              <p>{{ employee.contact_info }}</p>
+              <form action="{% url 'users:contact_info' pk=user.pk %}">
+                  <input style="margin-top: 10px;" type="submit" value="Edit ContactInfo" />
+              </form>
+              <br><br>
+
           </li>
           
           <li>
