@@ -93,7 +93,7 @@
             {% for post in my_posts %}
 
               {% if company.user|striptags == post.user|striptags %}
-              <h4><a href="{% url 'posts:detail' pk=post.pk %}">{{post.title}}</a></h3>  
+              <h3><a href="{% url 'posts:detail' pk=post.pk %}">{{post.title}}</a></h3>
               {% endif %}
 
             {% endfor %}
