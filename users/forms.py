@@ -56,3 +56,27 @@ class EmployeeSignUpForm(UserCreationForm):
         employee.telephone += self.clean()['telephone']
         employee.save()
         return user
+
+
+class CompanyAboutUpdateForm(forms.ModelForm):
+    about = forms.Textarea()
+
+    class Meta:
+        model = Company
+        fields = ['about']
+
+        widgets = {
+            'about': forms.Textarea(attrs={'rows':10, 'cols':80}),
+        }
+
+class EmployeeUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Employee
+        fields = ['about', 'contact_info', 'image']
+
+        widgets = {
+            'about': forms.Textarea(attrs={'rows':10, 'cols':80}),
+        }
+
+

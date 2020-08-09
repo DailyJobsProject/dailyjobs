@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from rest_framework import viewsets
 
-from .forms import ApplicationForm
+from .forms import ApplicationForm, CompanyPostForm
 
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 
@@ -16,16 +16,20 @@ from .serializers import CompanyPostSerializer, ApplicationSerializer
 
 User = get_user_model()
 
+
 class PostCreateView(LoginRequiredMixin, CreateView):
-    fields = ('title', 'description', 'start_date', 'end_date')
     model = CompanyPost
+    form_class = CompanyPostForm
+    template_name = 'posts/companypost_form.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.image = self.request.FILES
         self.object.save()
         return super().form_valid(form)
+
+    def get_absolute_url(self):
+        return reverse("posts:detail", kwargs={'pk': self.pk})
 
 class PostDetailView(DetailView):
     model = CompanyPost
@@ -76,10 +80,18 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = CompanyPost
-    fields = ['title', 'description','start_date', 'end_date']
+    form_class = CompanyPostForm
     template_name = 'posts/companypost_update.html'
     context_object_name = 'posts'
-    success_url = reverse_lazy('posts:list')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+    def get_absolute_url(self):
+        return reverse("post:detail", kwargs={'pk': self.pk})
 
 class ApplicationDeleteView(LoginRequiredMixin, DeleteView):
     model = Application
@@ -93,8 +105,6 @@ class ApplicationDeleteView(LoginRequiredMixin, DeleteView):
 @login_required
 def post_apply(request, pk):
     post = get_object_or_404(CompanyPost, pk=pk)
-    # import pdb
-    # pdb.set_trace()
     if request.method == "POST":
         form = ApplicationForm()
         application = form.save(commit=False)

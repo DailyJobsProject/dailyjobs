@@ -100,3 +100,7 @@ html, body {
 .text-description{
     text-align: center;
 }
+
+.post-form{
+    width: 300px;
+}

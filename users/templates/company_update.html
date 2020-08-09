@@ -6,7 +6,12 @@
   <div class="container" style="margin-top: 20;">
     <form method="post">
       {% csrf_token %}
-      {{ form|crispy }}
+      
+      {% for field in form %}
+        <p style="font-weight: bold;">{{field.label}}</p>
+        {{field}}
+      {% endfor %}
+      <br>
       <button type="submit" class="btn btn-warning">Update</button>
     </form>
   </div>

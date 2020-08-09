@@ -13,7 +13,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, TemplateView, DetailView, 
                                   UpdateView)
 
-from .forms import CompanySignUpForm, EmployeeSignUpForm
+from .forms import (CompanySignUpForm, EmployeeSignUpForm, CompanyAboutUpdateForm,
+                    EmployeeUpdateForm)
+                    
 from .models import User, Company, Employee
 
 from rest_framework import viewsets
@@ -41,7 +43,8 @@ def user_redirect(request):
         return HttpResponseRedirect(url)
 
 class LogOutView(LogoutView):
-    next_page = 'registration/logged_out.html'
+    """Redirects to login page"""
+    pass
 
 class CompanySignUpView(CreateView):
     """SignUp view for Company-type user"""
@@ -76,13 +79,8 @@ class CompanyDetailView(LoginRequiredMixin, DetailView):
         context["my_posts"] = CompanyPost.objects.all()
         return context
 
-class CompanyUpdateView(LoginRequiredMixin, UpdateView):
-    """Updates Company.about"""
 
-    login_url = 'accounts/login'
-    model = Company
-    fields = ['about']
-    template_name = 'company_update.html'
+
 
 class CProfilePicUpdateView(LoginRequiredMixin, UpdateView):
     """Updates Company.image (profile picture)"""
@@ -91,6 +89,25 @@ class CProfilePicUpdateView(LoginRequiredMixin, UpdateView):
     model = Company
     fields = ['image']
     template_name = 'cprofilepic_update.html'
+
+class CompanyUpdateView(LoginRequiredMixin, UpdateView):
+    """Updates Company.about"""
+
+    login_url = 'accounts/login'
+    model = Company
+    form_class = CompanyAboutUpdateForm
+    template_name = 'company_update.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+    def get_absolute_url(self):
+        return reverse("users:company_detail", kwargs={'pk': self.pk})
+
+
 
 class EmployeeSignUpView(CreateView):
     """SignUp view for Employee-type user"""
@@ -127,12 +144,13 @@ class EmployeeDetailView(LoginRequiredMixin, DetailView):
         context["posts"] = CompanyPost.objects.all()
         return context
 
+
 class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     """Updates Employee.about"""
     
     login_url = 'accounts/login'
     model = Employee
-    fields = ['about', 'contact_info', 'image']
+    form_class = EmployeeUpdateForm
     template_name = 'employee_update.html'
 
 class EProfilePicUpdateView(LoginRequiredMixin,UpdateView):
