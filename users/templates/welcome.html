@@ -1,15 +1,28 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<div class="site-description">
-    <ul class="text-description">
-        <p>
-            <h3>
-                DailyJobs is a one-day-job platform where you can post job offers as a company and apply for jobs as a potential employee.
-                The jobs destined for this platform range from one day to around a week and require minimum work experience.
-            </h3>
-        </p>
-    </ul>
-</div>
+
+
+    <div class="title">
+        <p> <h1>Welcome to DailyJobs!</h1></p>
+    </div>
+
+    <div class="site-description">
+            <p>
+                <h4>DailyJobs is a one-day-job platform where you can post job offers as a company and apply for jobs as a potential employee.
+                    The jobs destined for this platform range from one day to around a week and require minimum work experience.
+                </h4>
+            </p>
+
+
+    </div>
+
+        <div class-="home-btns">
+            <a href="{% url 'login' %}">Login </a>
+            <a href="{% url 'users:signup' %}">SignUp</a>
+        </div>
+
+
+
 {% endblock  %}
-    
+

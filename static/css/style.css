@@ -92,15 +92,33 @@ html, body {
     margin-top: 40px;
 }
 .site-description{
-    display:flex;
-    margin-left: 20px;
-    flex-direction: column;
-}
+    width: 450px;
+    height: 220px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: justify;
+    margin: auto;
 
-.text-description{
+    font-family:  Arvo;
+
+}
+.title{
     text-align: center;
+    font-family:  Arvo;
 }
-
-.post-form{
-    width: 300px;
+.background{
+    background: none repeat scroll 0 0 #FFFFFF;
+    height: 100%;
+    left: 0%;
+    position: fixed;
+    width: 100%;
 }
+.background img{
+    bottom: 0;
+    display: block;
+    left: 0;
+    margin: auto;
+    min-height: 50%;
+    min-width: 50%;
+    right: 0;
+    top: 0; }
