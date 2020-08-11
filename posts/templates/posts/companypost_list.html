@@ -1,21 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    {% if user.is_authenticated %}
-        <h3>Job Offers</h3>
-
-        {% for post in posts %}
-              <h3><a href="{% url 'posts:detail' pk=post.pk %}">{{post.title}}</a></h3>
-
-        {% endfor %}
-
-    {% endif %}
-
+ <div class="btn-create-post" style="">
     {% if user.is_company %}
     <h3><a href="{% url 'posts:create' %} " class="btn btn-success">Create Post</a><br></h3>
+  {% endif %}
+ </div>
+
+    <div class="list-style" style="height: 1000px; overflow: auto;" >
+
+      <div class="container">
+
+        {% if user.is_authenticated %}
+            <h1 style="margin-left:280px; margin-bottom: 20px">Job Offers:</h1>
+
+          {% for post in posts %}
+
+        <div class="post-box" style=" background-color: rgba(255, 255, 255, 0.80); width: 600px; height: 150px; border: grey;
+                                    border-style: outset; border-radius: 25px; margin:auto ">
+        <h3 style="margin-left: 10px; margin-right: 10px;"> <a class="item" style="color: black;" href="{% url 'posts:detail' pk=post.pk %}">
+                {{post.title}}
+                by
+                {{post.user}}
+                created at:
+                {{post.created_at}}
+         </a> </h3>
+      </div>
+    <br>
+
+
+    {% endfor %}
 
     {% endif %}
-    
+
+
+    </div>
 </div>
 {% endblock %}

@@ -43,10 +43,6 @@ html, body {
     min-height: 100%;
 }
 
-#main {
-    overflow: auto;
-    /* padding-bottom: 200px; */
-}
 
 #footer {
     background-color: #101010;
@@ -122,10 +118,16 @@ body {
     background-size: cover;
     height: 100%;
     width: 100%;
+    position: absolute;
     
 }
 
 .home-btns {
     margin: auto;
     width: 400px;
+}
+.
+
+.post-box{
+
 }
