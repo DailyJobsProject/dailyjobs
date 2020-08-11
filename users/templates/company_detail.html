@@ -45,9 +45,7 @@
             <!--Current Company Posts List View -->
             <h3>My job posts</h3>
             {% for posts in user.posts.all %}    
-            <ul>
-                <h4><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></h4>
-            </ul>
+              <h4><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></h4>
 
             {% endfor %}
 

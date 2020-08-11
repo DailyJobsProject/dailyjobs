@@ -1,39 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
- <div class="btn-create-post" style="">
-    {% if user.is_company %}
-    <h3><a href="{% url 'posts:create' %} " class="btn btn-success">Create Post</a><br></h3>
-  {% endif %}
- </div>
 
-    <div class="list-style" style="height: 1000px; overflow: auto;" >
+<div class="container flex" style="justify-content: space-around;">
 
-      <div class="container">
+	{% if user.is_company %}
+	<div style="margin-top: 200px; ">
+		<a style="font-size: xx-large;" href="{% url 'posts:create' %} " class="btn btn-success">Create Post</a>
+	</div>
+	{% endif %}
 
-        {% if user.is_authenticated %}
-            <h1 style="margin-left:280px; margin-bottom: 20px">Job Offers:</h1>
+	<div>
+			{% if user.is_authenticated %}
+					<h1 style="margin-left:150px; margin-bottom: 20px">Job Offers:</h1>
 
-          {% for post in posts %}
+				{% for post in posts %}
+					<div style=" background-color: rgba(255, 255, 255, 0.80); width: 600x; height: 100px; border: grey;
+																			border-style: outset; border-radius: 25px; margin:auto ">
+						<h4 style="margin-left: 10px; margin-right: 10px;"> 
+							<a class="item" style="color: black;" href="{% url 'posts:detail' pk=post.pk %}">
+								{{post.title}}
+								by
+								{{post.user}}
+								created at:
+								{{post.created_at}}
+							</a>
 
-        <div class="post-box" style=" background-color: rgba(255, 255, 255, 0.80); width: 600px; height: 150px; border: grey;
-                                    border-style: outset; border-radius: 25px; margin:auto ">
-        <h3 style="margin-left: 10px; margin-right: 10px;"> <a class="item" style="color: black;" href="{% url 'posts:detail' pk=post.pk %}">
-                {{post.title}}
-                by
-                {{post.user}}
-                created at:
-                {{post.created_at}}
-         </a> </h3>
-      </div>
-    <br>
+						</h4>
 
+					</div>    
 
-    {% endfor %}
+					<br>	
 
-    {% endif %}
-
-
-    </div>
+				{% endfor %}
+			
+			{% endif %}
+	</div>
 </div>
 {% endblock %}
