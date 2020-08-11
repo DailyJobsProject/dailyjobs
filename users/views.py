@@ -142,6 +142,7 @@ class EmployeeDetailView(LoginRequiredMixin, DetailView):
         context = super(EmployeeDetailView, self).get_context_data(**kwargs)
         context["my_applications"] =  Application.objects.all()
         context["posts"] = CompanyPost.objects.all()
+        context['identifiers'] = Application.objects.all().values_list('identifier', flat=True)
         return context
 
 

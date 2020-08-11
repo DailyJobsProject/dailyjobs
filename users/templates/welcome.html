@@ -1,28 +1,31 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% block content %}
 
+<div class="welcome-page" style="margin-top: 20px;">
+  <p style="font-size: xxx-large; text-align: center;">Welcome to DailyJobs!</p>
+  <br>
 
-    <div class="title">
-        <p> <h1>Welcome to DailyJobs!</h1></p>
-    </div>
+  <h4 class="welcome-page-description">DailyJobs is a one-day-job platform where you can post job offers as a company and apply for jobs as a potential employee.
+    The jobs destined for this platform range from one day to around a week and require minimum work experience.
+  </h4>
 
-    <div class="site-description">
-            <p>
-                <h4>DailyJobs is a one-day-job platform where you can post job offers as a company and apply for jobs as a potential employee.
-                    The jobs destined for this platform range from one day to around a week and require minimum work experience.
-                </h4>
-            </p>
+  {% if user.is_authenticated %}
+  <div class="home-btns" style="margin-top: 20px;">
+    <a class="signup-btn" style="text-decoration: none;" href="{% url 'posts:list' %}">Job Offers</a>
+    <!-- <a  href=""></a> -->
 
+  </div>
 
-    </div>
+  {% else %}
+  <div class="home-btns" style="margin-top: 50px;">
+    <a class="signup-btn" style="text-decoration: none;" href="{% url 'login' %}">Login </a>
+    <a class="signup-btn" style="text-decoration: none; margin-left: 170px;" href="{% url 'users:signup' %}">SignUp</a>
+    
+  </div>
 
-        <div class-="home-btns">
-            <a href="{% url 'login' %}">Login </a>
-            <a href="{% url 'users:signup' %}">SignUp</a>
-        </div>
-
-
-
+</div>
+  {% endif %}
+  
+  
 {% endblock  %}
-

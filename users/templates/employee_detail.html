@@ -10,14 +10,14 @@
     <ul class="flex">
       <li>
         <h2>@{{employee.user}}</h2>
-          
+
         <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
         {% if employee.image %}
-            <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 100px; width: 100px;">
+            <img src="{{ employee.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
             <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
                 <input type="submit" value="Change Profile Pic" />
             </form>
-        
+
         <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
         {% else %}
             <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
@@ -40,15 +40,15 @@
             </form>
             <br><br>
 
-               <h2>Contact info </h2>
-              <p>{{ employee.contact_info }}</p>
-              <form action="{% url 'users:contact_info' pk=user.pk %}">
-                  <input style="margin-top: 10px;" type="submit" value="Edit ContactInfo" />
-              </form>
-              <br><br>
+            <h2>Contact info </h2>
+            <p>{{ employee.contact_info }}</p>
+            <form action="{% url 'users:contact_info' pk=user.pk %}">
+                <input style="margin-top: 10px;" type="submit" value="Edit Contact Info" />
+            </form>
+            <br><br>
 
           </li>
-          
+
           <li>
             <!-- If there the user uploaded a CV, it will be fetched from media/CVs -->
             {% if employee.cv %}
@@ -60,34 +60,41 @@
 
             {% else %}
               <p>CV not uploaded</p>
-      
+
               <form action="{% url 'users:cv_update' pk=user.pk %}">
                   <input type="submit" value="Upload CV" />
               </form>
 
             {% endif %}
-          </li>
-          <p>Telephone: {{ employee.telephone }}</p>
-          <li>
-            <h3>My job applications</h3>
-            {% for post in posts %}
-              {% for application in my_applications %}
-                  {% if post.title|striptags|add:user.username|striptags == application.identifier|striptags %}
-                        <h4><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></h4>
-
-                  {% endif %}
-
-              {% endfor %}
-              
-            {% endfor %}
 
           </li>
+
+          <h3>Telephone: {{ employee.telephone }}</h3>
+          <p>_______________________</p>
 
         </ul>
 
+        <li>
+          <h3>My job applications</h3>
+          <p>____________________</p>
+          
+          {% for post in posts %}
+            {% for application in my_applications %}
+                {% if post.title|striptags|add:user.username|striptags == application.identifier|striptags %}
+                      <h4><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></h4>
+
+                {% endif %}
+
+            {% endfor %}
+            
+          {% endfor %}
+
+        </li>
+        
       </li>
 
-    </ul>  
+    </ul>
+
 {% else %}
     <!-- Non updateable Employee profile page -->
     <ul class="flex">
@@ -108,9 +115,9 @@
         <ul class="flex flex-column">
           <h2>About</h2>
           {{employee.about}}
-          
+
           <h3 class="top-margin">Telephone: {{ employee.telephone }}</h3>
-          
+
           {% if employee.cv %}
             <h3 class="top-margin"><a href="{{ employee.cv.url }}">{{ employee.user.username }}'s CV</a></h3>
           <br>

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
 
@@ -7,15 +8,11 @@
         {% if user.is_authenticated %}
             <p>Your account doesn't have access to this page. To proceed,
                 please login with an account that has access.</p>
-
-        {% else %}
-            <p>Please login to see this page.</p>
-
         {% endif %}
 
     {% endif %}
 
-<div  class="form top-margin">
+<div class="form top-margin">
     <form method="post" action="{% url 'login' %}"><br>
             {% csrf_token %}
             {{ form|crispy }}
@@ -27,5 +24,6 @@
         {# Assumes you setup the password_reset view in your URLconf #}
         {#<p><a href="{% url 'password_reset' %}">Lost password?</a></p>#}
 
+</div>
 </div>
     {% endblock %}

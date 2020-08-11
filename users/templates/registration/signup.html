@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="form flex flex-column">
-	<h1 style="margin-left: 100px; margin-top: 60px;">Sign Up as:</h1>
-	<div class="flex signup-div" style="margin-top: 30px;">
-			<a style="margin-left: 0;" href="{% url 'users:company_signup' %}" ><button class="signup-btn">Company</button></a>
-			<a href="{% url 'users:employee_signup' %}"><button class="signup-btn">Employee</button></a>
+<div class="form flex flex-column signup-page">
+	<h1 style="margin-left: 100px; margin-top: 30px;">Sign Up as:</h1>
+	<div class="flex signup-div" style="margin-top: 30px; margin-bottom: 30px; justify-content: space-around;">
+		<a href="{% url 'users:company_signup' %}" ><button class="signup-btn">Company</button></a>
+		<a href="{% url 'users:employee_signup' %}"><button class="signup-btn">Employee</button></a>
 	</div>
 </div>
 

@@ -45,12 +45,11 @@ html, body {
 
 #main {
     overflow: auto;
-    padding-bottom: 200px;
+    /* padding-bottom: 200px; */
 }
 
 #footer {
     background-color: #101010;
-    position: relative;
     height: 70px;
     margin-top: -70px;
     clear: both;
@@ -71,54 +70,62 @@ html, body {
     height: 100%;
 }
 
-.signup-btn{
+.signup-btn {
     color: white;
     background-color: #1aa3ff;
     padding:  10px 24px;
-    border-radius: 8px;
+    border-radius: 15px;
     width: 100%;
     height: 100%;
     font-family: monospace;
     font-size: x-large;
-    height: 2cm;
-    width: 5cm;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-.signup-div > a{
-    margin-left: 20px;
+a:visited{
+    text-decoration: none;
+}
+
+button:hover{
+    color: #095191;
 }
 
 .top-margin {
     margin-top: 40px;
 }
-.site-description{
-    width: 450px;
-    height: 220px;
-    display: flex;
-    flex-wrap: wrap;
+
+.welcome-page {
+    border: black;
+    border-radius: 25px;
+    padding: 30px 50px 50px 50px;
+    background-color: rgba(169,169,169, 0.4);
+    margin: auto;
+    width: 550px;
+}
+
+.signup-page {
+    border: black;
+    border-radius: 25px;
+    background-color: rgba(169,169,169, 0.4);
+    margin-top: 20px;
+}
+
+.welcome-page-description{
+    width: 400px;
     text-align: justify;
     margin: auto;
-
-    font-family:  Arvo;
-
 }
-.title{
-    text-align: center;
-    font-family:  Arvo;
-}
-.background{
-    background: none repeat scroll 0 0 #FFFFFF;
+
+
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100%;
-    left: 0%;
-    position: fixed;
     width: 100%;
+    
 }
-.background img{
-    bottom: 0;
-    display: block;
-    left: 0;
+
+.home-btns {
     margin: auto;
-    min-height: 50%;
-    min-width: 50%;
-    right: 0;
-    top: 0; }
+    width: 400px;
+}
