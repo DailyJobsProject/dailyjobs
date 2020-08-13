@@ -78,5 +78,3 @@ class EmployeeUpdateForm(forms.ModelForm):
         widgets = {
             'about': forms.Textarea(attrs={'rows':10, 'cols':80}),
         }
-
-

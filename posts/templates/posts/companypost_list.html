@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<div class="container flex" style="justify-content: space-around;">
+<div class="container flex">
 
 	{% if user.is_company %}
-	<div style="margin-top: 200px; ">
+	<div style="margin-top: 100px; margin-right: 20px;">
 		<a style="font-size: xx-large;" href="{% url 'posts:create' %} " class="btn btn-success">Create Post</a>
 	</div>
 	{% endif %}
@@ -15,26 +15,26 @@
 					<h1 style="margin-left:150px; margin-bottom: 20px">Job Offers:</h1>
 
 				{% for post in posts %}
-					<div style=" background-color: rgba(255, 255, 255, 0.80); width: 600x; height: 100px; border: grey;
-																			border-style: outset; border-radius: 25px; margin:auto ">
-						<h4 style="margin-left: 10px; margin-right: 10px;"> 
-							<a class="item" style="color: black;" href="{% url 'posts:detail' pk=post.pk %}">
-								{{post.title}}
-								by
-								{{post.user}}
-								created at:
+					<div class="gray-box" style="min-width: 60%;">
+						<h4 style="margin-left: 10px; margin-right: 10px; color: black;">
+							<a class="item"  href="{% url 'posts:detail' pk=post.pk %}">
+								<h2 style="margin: 0px; font-family: serif;">{{post.title}}</h2>
+							</a>								
+								<p>by {{post.user}}</p>
+								published on:
 								{{post.created_at}}
-							</a>
 
 						</h4>
 
-					</div>    
+					</div>
 
-					<br>	
+					<br>
 
 				{% endfor %}
-			
+
 			{% endif %}
+
 	</div>
+
 </div>
 {% endblock %}

@@ -79,9 +79,6 @@ class CompanyDetailView(LoginRequiredMixin, DetailView):
         context["my_posts"] = CompanyPost.objects.all()
         return context
 
-
-
-
 class CProfilePicUpdateView(LoginRequiredMixin, UpdateView):
     """Updates Company.image (profile picture)"""
 

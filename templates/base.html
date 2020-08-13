@@ -13,12 +13,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
+	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet"> 
     <title>DailyJobs</title>
 
 
 </head>
-<body style="background-image: url('{% static 'job2.png' %}');">
+<body>
 	<div class="navbar navbar-inverse" style="margin-bottom: 0px;">
 			<div class="container-fluid">
 					<div class="row">
@@ -83,17 +85,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-	<div id="content">
-			<div id="main" style="height: 639px; overflow: auto; margin-bottom: 40px;">
-					{% block content %}{% endblock %}
+	<div class="content" style="background-image: url('{% static 'job2.png' %}'); ">
+			<div class="main" style="height: 639px; overflow: auto; margin-bottom: 40px;" >
+				{% block content %}{% endblock %}
 			</div>
 	</div>
+
+</body>
 
 <footer class='text-center' id='footer' style="margin-top: 200px;">
 	<p class='copyright' style='color:beige' >© Raicu & Muntean 2020. All rights reserved.</p>
 </footer>
-
-</body>
 
 </html>

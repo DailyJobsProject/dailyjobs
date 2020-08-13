@@ -7,23 +7,23 @@
   <!-- If the logged in Company is the owner of the currently accesed profile page,
     fields can pe updated -->
 
-  <div class="container">
+  <div class="container top-margin" style="margin-bottom: 40px;">
     <ul class="flex">
       <li>
-        <h2>@{{company.name}}</h2>
+        <h2 style="margin: 0px 0px 10px 0px;">@{{company.name}}</h2>
 
         <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
         {% if company.image %} 
             <img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
             <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
-                <input type="submit" value="Change Profile Pic" />
+                <input class="signup-btn" type="submit" value="Upload" />
             </form>
 
         <!-- If user hasn't uploaded any profile pictures, a placeholder image will be fetched from static/users/user.png -->
         {% else %}
             <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
             <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
-                <input type="submit" value="Change Profile Pic" />
+                <input type="submit" value="Upload" />
             </form>
 
         {% endif %}
@@ -31,26 +31,39 @@
 
       <!--Company Description -->
       <li>
-        <ul class="flex flex-column">
+        <ul class="flex flex-column gray-box">
           <li>
             <h2>About</h2>
-            <p>{{company.about}}</p>
-            <form action="{% url 'users:company_update' pk=user.pk%}">
-              <input type="submit" value="Edit About" />
-            </form>
+            <p style="font-size: medium;">{{company.about}}</p>
             <br>
+              <form action="{% url 'users:company_update' pk=user.pk%}">
+                <input class="signup-btn" type="submit" value="Edit About" />
+              </form>
+            <br><br>
+            <!-- Companypost Create View -->
+            <h4><a class="btn btn-success" href="{% url 'posts:create' %}">Create Post</a></h4>
+
           </li>
 
-          <li>
+          <li style="padding: 0px;">            
             <!--Current Company Posts List View -->
-            <h3>My job posts</h3>
-            {% for posts in user.posts.all %}    
-              <h4><a href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></h4>
-
+            <div class="flex" style="justify-content: space-between;">
+              <h3 style="margin-bottom: 0;">
+                <p>My job posts</p>
+                <p>_____________</p>
+              </h3>
+              <h3 style="margin-bottom: 0;">
+                <p>Published on</p>
+                <p>_____________</p>
+              </h3>
+            </div>
+            {% for posts in user.posts.all %}
+            <div class="flex" style="justify-content: space-between;">
+              <h4 style="max-width: 500px;"><a style="color: black;" href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></h4>
+              {{posts.created_at}}
+            </div> 
             {% endfor %}
 
-            <!-- Companypost Create View -->
-              <h3><a class="btn btn-success" href="{% url 'posts:create' %}"><h4>Create Post</h4></a></h3>
           </li>
 
         </ul>

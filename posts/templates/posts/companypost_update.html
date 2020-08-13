@@ -2,8 +2,7 @@
 
 {% block content %}
 
-{% load crispy_forms_tags %}
-  <div class="container" style="margin-top: 20;">
+  <div class="gray-box" style="margin: 30px 0px 0px 30px; width: 60%;">
     <form method="post">
       {% csrf_token %}
       {% for field in form %}
@@ -13,7 +12,9 @@
 
       {% endfor %}
       
-      <button type="submit" class="btn btn-warning" ;">Update</button>
+      <button type="submit" class="btn btn-warning;">Update</button>
+
     </form>
+
   </div>
 {% endblock %}

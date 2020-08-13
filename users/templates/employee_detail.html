@@ -20,7 +20,7 @@
 
         <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
         {% else %}
-            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 128px; width: 128px;">
             <form action="{% url 'users:eprofilepic_update' pk=user.pk%}">
                 <input type="submit" value="Change Profile Pic" />
             </form>
@@ -98,7 +98,7 @@
 {% else %}
     <!-- Non updateable Employee profile page -->
     <ul class="flex">
-      <li>
+      <li style="min-width: 200px;">
         <h2>@{{employee.user}}</h2>
 
         {% if employee.image %}
@@ -110,27 +110,28 @@
         {% endif %}
         <br>
       </li>
+      <div class="gray-box" style="margin: 30px 0px 0px 30px; width: 80%;">
+        <li>
+          <ul class="flex flex-column">
+            <h2>About</h2>
+            <p style="text-align: justify;">{{employee.about}}</p>
 
-      <li>
-        <ul class="flex flex-column">
-          <h2>About</h2>
-          {{employee.about}}
+            <h3 class="top-margin">Telephone: {{ employee.telephone }}</h3>
 
-          <h3 class="top-margin">Telephone: {{ employee.telephone }}</h3>
+            {% if employee.cv %}
+              <h3 class="top-margin"><a href="{{ employee.cv.url }}">{{ employee.user.username }}'s CV</a></h3>
+            <br>
+            {% else %}
+              <p>CV not uploaded</p>
 
-          {% if employee.cv %}
-            <h3 class="top-margin"><a href="{{ employee.cv.url }}">{{ employee.user.username }}'s CV</a></h3>
-          <br>
-          {% else %}
-            <p>CV not uploaded</p>
+            {% endif %}
+          </ul>
 
-          {% endif %}
-        </ul>
-
-      </li>
-
+        </li>
+      </div>
     </ul>
 
+  </div>
 {% endif %}
 
 </div>
