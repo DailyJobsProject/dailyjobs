@@ -61,7 +61,7 @@ html, content {
     background-color: rgba(169,169,169, 0.4);
 }
 
-/* .form-registration {
+.form-registration {
     margin: auto;
     width: 400px;
     padding: 10px;
@@ -71,7 +71,8 @@ html, content {
     margin-bottom: 40px;
     padding: 30px 50px 50px 50px;
     background-color: rgba(169,169,169, 0.4);
-} */
+}
+
 
 .auth-btns{
     color: white;

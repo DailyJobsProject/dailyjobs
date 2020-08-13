@@ -18,4 +18,5 @@ urlpatterns = [
     path('<int:pk>/post_update/', views.PostUpdateView.as_view(), name='update'),
     path('<int:pk>/apply/', views.post_apply, name='apply'),
     path('<int:pk>/application_delete/', views.ApplicationDeleteView.as_view(), name='application_delete'),
+    path('search', views.SearchView.as_view(), name='search'),
 ]

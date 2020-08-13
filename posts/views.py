@@ -130,3 +130,16 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all().order_by('identifier')
     serializer_class = ApplicationSerializer
 
+class SearchView(ListView):
+    model = CompanyPost
+    template_name = 'posts/companypost_list.html'
+    context_object_name = 'posts'
+    def get_queryset(self):
+        result = super(SearchView, self).get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+            postresult = CompanyPost.objects.filter(title__contains=query)
+            result = postresult
+        else:
+            result = None
+        return result
