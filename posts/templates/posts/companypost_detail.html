@@ -2,83 +2,101 @@
 {% load static %}
 
 {% block content %}
-		<ul class="flex" style="margin: 20px 0px 0px 40px;">
-			<li class="gray-box post-description" style="background-color: rgb(232,232,232, 0.7); width: 100%;">
-				<div class="flex" style="flex-direction: column;">
-					<h2 style="margin: 0px; color: black;"> {{ companypost.title }}</h2>
-					<p style="font-size: medium; color: gray;">Published on: {{ companypost.created_at }}</p>
-					<ul style="margin-bottom: 0px;">
-						{% for company in companies %}
-								{% if companypost.user|striptags ==  company.user|striptags %}
-										<h3>by <a href="{% url 'users:company_detail' pk=company.user.pk %}">@{{ companypost.user.company.name }}</a></h3>
-								<br>
-		
-								{% endif %}
-										
-						{% endfor %}
-						
-					</ul>
 
-				</div>
-				
-				<p class="job-description" >{{companypost.description}}</p>
-				<br>
-				<p>Between: {{ companypost.start_date }} - {{ companypost.end_date }}</p>
-				<br>
-				{% if user.is_employee %}
-						{% for application in applications %}
-								{% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
-										<h4 class="serif bot-margin">You applied for this job</h4>
+<ul class="flex top-margin left-margin">
+	<li class="gray-box post-description" style="width: 70%;">
+		<div class="flex flex-column">
+			<h2 class="serif">{{ companypost.title }}</h2>
+			<p class="medium" style="color: gray;">Published on: {{ companypost.created_at }} - {{ companypost.city }}</p>
+			<div class="no-margin flex space-between serif" style="width: 90%;">
 
-										<a class="general-btn" href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
-
-								{% endif %}
-
-						{% endfor %}
-
-					{% if companypost.title|striptags|add:user.username|striptags not in identifiers %}
-								<a class="general-btn" href="{% url 'posts:apply' pk=companypost.pk %}">Apply</a>
+				<!-- Searches DB for the creator of the specific Company Post -->
+				{% for company in companies %}
+					{% if companypost.user|striptags ==  company.user|striptags %}
+						<h3>by <a href="{% url 'users:company_detail' pk=company.user.pk %}">@{{ companypost.user.company.name }}</a></h3>
 
 					{% endif %}
 
-			</li>
+				{% endfor %}
 
-				{% elif user.is_company %}
 				
-				{% if companypost.user == user.company.user %}
-					<div class="flex">
-						<h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="general-btn" 
-							style="background-color: orange; text-decoration: none; margin-right: 20px;">Update Post</a></h3>
+			</div>
 
-						<h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="general-btn" 
-							style="background-color: red; text-decoration: none;">Delete Post</a></h3>
-
-					</div>
-				
-					<li class="gray-box" style="background-color: rgb(232,232,232, 0.7); margin-left: 150px; padding: 0px 70px 0px 70px;">
-						<br>
-						<h3 style="margin-bottom: 0px;">Applications</h3>
-						<p>_____________________</p>
-
-						{% for application in applications %}
-							{% if application.post|striptags == companypost.title|striptags %}
-								<h2><a href="{% url 'users:employee_detail' pk=application.name.pk %}">{{application.name}}</a></h2>
-
-							{% endif %}
-
-						{% endfor %}
-
-					</li>
-				{% endif %}
-			</li>
-
-		</ul>
-		<div style="margin: 40px 0px 0px 40px;">
-			<a class="general-btn" style="text-decoration: none; background-color: rgb(0, 209, 28);" href="{% url 'posts:list' %} ">
-				Return to Job Offers
-			</a>
 		</div>
+		<br>
+		<p class="job-description" >{{companypost.description}}</p>
+		<br>
 
-    {% endif %}
+		<p class="serif">Between: {{ companypost.start_date }} - {{ companypost.end_date }}</p>
+		
+		<br>
+
+		<!-- Checks if currently logged in Employee applied for the specific job -->
+		<!-- If already applied, Unapply button is added -->
+		{% if user.is_employee %}
+			{% for application in applications %}
+				{% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
+					<h4 class="serif bot-margin">You applied for this job</h4>
+
+					<a class="general-btn" href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
+
+				{% endif %}
+
+			{% endfor %}
+
+			<!-- If currently logged in Employee didn't apply for the specific job, Apply button is added -->
+			{% if companypost.title|striptags|add:user.username|striptags not in identifiers %}
+				<a class="general-btn" href="{% url 'posts:apply' pk=companypost.pk %}">Apply</a>
+
+			{% endif %}
+
+	</li>
+
+		{% elif user.is_company %}
+
+		<!-- If the currently logged in Company is the creator of the post, do the following: -->
+			{% if companypost.user == user.company.user %}
+
+			<!-- Update Post and Detele Post buttons are added -->
+				<div class="flex">
+					<h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="general-btn" 
+						style="background-color: orange; text-decoration: none; margin-right: 20px;">Update Post</a></h3>
+
+					<h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="general-btn" 
+						style="background-color: red; text-decoration: none;">Delete Post</a></h3>
+
+				</div>
+			
+				<li class="gray-box" style="background-color: rgb(232,232,232, 0.7); margin-left: 100px; padding: 0px 70px 0px 70px;">
+					<br>
+
+					<!-- Show Employees that applied for the specific job -->
+					<h3 style="margin-bottom: 0px;">Applications</h3>
+					<p>_____________________</p>
+
+					{% for application in applications %}
+						{% if application.post|striptags == companypost.title|striptags %}
+							<h2><a href="{% url 'users:employee_detail' pk=application.name.pk %}">{{application.name}}</a></h2>
+
+						{% endif %}
+
+					{% endfor %}
+
+				</li>
+
+			{% endif %}
+
+		{% endif %}
+
+</ul>
+
+<!-- Returns currently logged in user to the list of Company Posts -->
+<div style="margin: 40px 0px 0px 40px;">
+
+	<a class="general-btn" style="text-decoration: none; background-color: rgb(0, 209, 28);" href="{% url 'posts:list' %} ">
+		Return to Job Offers
+	</a>
+
+</div>
 
 {% endblock  %}

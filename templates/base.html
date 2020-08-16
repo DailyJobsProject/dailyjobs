@@ -34,13 +34,13 @@
 									<div class="navbar-header">
 											<button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 											<a href="/" class="navbar-brand">DailyJobs</a>
+
 									</div>
 
 									<div class="navbar-collapse collapse" id="mobile_menu">
 											<ul class="nav navbar-nav">
 													<li class="active"><a href="/">Home</a></li>
-													<li><a href="#">About Us</a></li>
-													<li><a href="#">Contact Us</a></li>
+													<li><a href="{% url 'users:about' %}">About Us</a></li>
 
 											</ul>
 
@@ -50,8 +50,10 @@
 															<li><a href="{% url 'users:company_detail' pk=user.pk %}"><span class="glyphicon glyphicon-user"></span>@{{user.username}}</a></li>
 															<li><a href="{% url 'posts:list' %}">Job offers</a></li>
 															<li><a href="{% url 'logout' %}">Logout</a></li>
+
 													</ul>
-													{% endif %}
+
+											{% endif %}
 
 																			
 													{% if user.is_employee %}
@@ -59,6 +61,7 @@
 															<li><a href="{% url 'users:employee_detail' pk=user.pk %}"><span class="glyphicon glyphicon-user"></span>@{{user.username}}</a></li>
 															<li><a href="{% url 'posts:list' %}">Job Offers</a> </li>
 															<li><a href="{% url 'logout' %}">Logout</a></li>
+
 													</ul>
 
 													{% endif %}
@@ -69,6 +72,7 @@
 															<ul class="dropdown-menu">
 																	<li><a href="{% url 'users:login' %}">Login</a></li>
 																	<li><a href="{% url 'users:signup' %}">Sign Up</a></li>
+
 															</ul>				
 														
 													</li>
@@ -91,15 +95,19 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<div class="content" style="background-image: url('{% static 'job2.png' %}'); ">
-			<div class="main" style="height: 639px; overflow: auto; margin-bottom: 40px;" >
+		<!-- "main" div has height 100% so there is no empty white space between footer and body -->
+			<div class="main" style="height: 100%; overflow: auto; margin-bottom: 40px;" >
 				{% block content %}{% endblock %}
+
 			</div>
+
 	</div>
 
-</body>
+	<footer class='text-center footer' style="margin-top: 200px;">
+		<p class='copyright' style='color:beige' >© Raicu & Muntean 2020. All rights reserved.</p>
 
-<footer class='text-center footer' style="margin-top: 200px;">
-	<p class='copyright' style='color:beige' >© Raicu & Muntean 2020. All rights reserved.</p>
-</footer>
+	</footer>
+
+</body>
 
 </html>

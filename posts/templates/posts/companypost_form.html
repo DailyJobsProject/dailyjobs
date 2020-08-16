@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
+<!-- Form for creating a Company Post -->
 {% block content %}
 	<div class="gray-box update" style="margin: 30px 0px 30px 30px; width: 60%;">
 		<form id='postForm' action="{% url 'posts:create' %}" method="POST">

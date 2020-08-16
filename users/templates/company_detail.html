@@ -23,14 +23,14 @@
         {% else %}
             <img src="{% static 'users/user.png' %}" class="thumbnail" alt="Upload profile pic" style="height: 128px; width: 128px;">
             <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
-                <input type="submit" value="Upload" />
+                <input class="general-btn" type="submit" value="Upload" />
             </form>
 
         {% endif %}
       </li>
 
       <!--Company Description -->
-      <li>
+      <li style="width: 90%">
         <ul class="flex flex-column gray-box" style="padding-right: 0px;">
           <li>
             <h2>About</h2>
@@ -55,20 +55,29 @@
           <li>            
             <!--Current Company Posts List View -->
             <div class="flex space-between">
+
               <h3 style="margin-bottom: 0;">
                 <p>My job posts</p>
                 <p>_____________</p>
               </h3>
+
               <h3 style="margin-bottom: 0;">
                 <p>Published on</p>
                 <p>_____________</p>
               </h3>
             </div>
+
             {% for posts in user.posts.all %}
-            <div class="flex" style="justify-content: space-between;">
-              <h4 style="max-width: 500px;"><a style="color: black;" href=" {% url 'posts:detail' pk=posts.pk %}">{{posts.title}}</a></h4>
+            <div class="flex personal-posts space-between">
+              <h4 style="max-width: 500px;;">
+                <a class="personal-posts" href=" {% url 'posts:detail' pk=posts.pk %}">
+                  {{posts.title}}
+                </a>
+              </h4>
               {{posts.created_at}}
+
             </div> 
+
             {% endfor %}
 
           </li>

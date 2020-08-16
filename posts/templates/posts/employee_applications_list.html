@@ -2,21 +2,22 @@
 
 {% block content %}
 
+<!-- List of jobs the current logged in employee has apllied to -->
 {% if user.is_employee %}
 <h3>Jobs I applied to:</h3>
 
-    {% for post in posts %}
-        {% for application in applications %}
-            {% if post.title|striptags|add:user.username|striptags == application.identifier|striptags %}
-                <ul>
-                    <h3><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></h3>
-                </ul>
+	{% for post in posts %}
+		{% for application in applications %}
+			{% if post.title|striptags|add:user.username|striptags == application.identifier|striptags %}
+				<ul>
+					<h3><a href=" {% url 'posts:detail' post.pk %}">{{post.title}}</a></h3>
+				</ul>
 
-            {% endif %}
+			{% endif %}
 
-        {% endfor %}
-        
-    {% endfor %}
+		{% endfor %}
+			
+	{% endfor %}
 
 {% endif %}
 

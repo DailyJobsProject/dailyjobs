@@ -2,12 +2,14 @@
 
 {% block content %}
 
+<!-- List of all Company Posts -->
 <div class="container flex c-list">
 	<div>
 		
 			{% if user.is_authenticated %}
 				<div class="flex c-list" style="justify-content: space-evenly;">
 
+						<!-- If current user is Company, Create Post button is added -->
 						{% if user.is_company %}
 						<div style="margin: 30px 0px 50px 0px;">
 							<a style="margin-right: 130px; font-size: xx-large; background-color: lightgreen; text-decoration: none;" href="{% url 'posts:create' %} " 
@@ -18,22 +20,24 @@
 						{% endif %}
 
 					<h1 style="margin-bottom: 20px; font-family: serif;">Job Offers:</h1>
+					
 					<form class="form-inline my-2 my-lg-0" style="margin-top: 20px" method="GET" action="{% url 'posts:search' %}" >
-						<input class="form-control mr-sm-2" type="search" name="search" placeholder="search by keywords">
+						<input class="form-control mr-sm-2" type="search" name="search" placeholder="keyword or city">
 						<button class="btn btn btn-outline-info my-2 my-sm-0" type="submit"> Search </button>
 					</form>
 
 				</div>
 
 				{% for post in posts %}
-					<div class="gray-box" style="width: 1200px;">
+					<div class="gray-box" style="min-width: 1100px;">
 						<h4 style="margin-left: 10px; color: black;">
-							<a class="item"  href="{% url 'posts:detail' pk=post.pk %}">
-								<h2 style="margin: 0px; font-family: serif;">{{post.title}}</h2>
-							</a>								
-								<p>by {{post.user}}</p>
-								published on:
-								{{post.created_at}}
+							<a class="serif xx-large margin-bottom"  href="{% url 'posts:detail' pk=post.pk %}">
+								{{post.title}}
+							</a>
+							<p> </p>
+							<p>by <a href="{% url 'users:company_detail' pk=post.user.pk %}">{{post.user}}</a></p>
+
+							<p>published on: {{post.created_at}} - {{post.city}}</p>
 
 						</h4>
 

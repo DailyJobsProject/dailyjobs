@@ -11,8 +11,9 @@ User = get_user_model()
 
 class CompanyPost(models.Model):
     user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
-    title = models.TextField(max_length=20 ,editable=True)
+    title = models.TextField(max_length=50 ,editable=True)
     description = models.TextField(editable=True)
+    city = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now=True)
     start_date = models.DateField(null=False)
     end_date = models.DateField(null=False)

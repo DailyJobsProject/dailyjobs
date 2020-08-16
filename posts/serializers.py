@@ -1,6 +1,7 @@
 from .models import Application, CompanyPost
 from rest_framework import serializers
 
+# Serializers for REST API
 class CompanyPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyPost

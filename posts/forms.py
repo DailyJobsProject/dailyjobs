@@ -9,14 +9,15 @@ class ApplicationForm(forms.ModelForm):
         fields = []
 
 class CompanyPostForm(forms.ModelForm):
-    title = forms.Textarea(attrs={'rows':2, 'cols':50})
-    description = forms.Textarea(attrs={'rows':2, 'cols':50})
+    title = forms.Textarea()
+    description = forms.Textarea()
     start_date = forms.DateField(widget=forms.SelectDateWidget)
     end_date = forms.DateField(widget=forms.SelectDateWidget)
+    city = forms.CharField()
 
     class Meta:
         model = CompanyPost
-        fields = ['title', 'description', 'start_date', 'end_date']
+        fields = ['title', 'description', 'city', 'start_date', 'end_date']
 
         widgets = {
             'title': forms.Textarea(attrs={'rows':2, 'cols':50}),

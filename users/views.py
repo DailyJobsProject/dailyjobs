@@ -1,4 +1,3 @@
-from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -22,11 +21,20 @@ from rest_framework import viewsets
 from .serializers import CompanySerializer, EmployeeSerializer
 
 
+class AboutPage(TemplateView):
+    template_name = 'about.html'
+
+class WelcomePage(TemplateView):
+    """Welcome Page: localhost:8000"""
+    template_name = 'welcome.html'
+
+
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
 class LogInView(LoginView):
     template_name = 'registration/login.html'
+
 
 @login_required
 def user_redirect(request):
@@ -167,14 +175,6 @@ class CVUpdateView(LoginRequiredMixin,UpdateView):
     fields = ['cv']
     template_name = 'cv_update.html'
 
-class CompanyViewSet(viewsets.ModelViewSet):
-    queryset = Company.objects.all().order_by('name')
-    serializer_class = CompanySerializer
-
-class EmployeeViewSet(viewsets.ModelViewSet):
-    queryset = Employee.objects.all().order_by('user')
-    serializer_class = EmployeeSerializer
-
 class EmployeeContactUpdateView(LoginRequiredMixin, UpdateView):
     """Updates Employee.contact"""
     login_url = 'accounts/login'
@@ -182,5 +182,12 @@ class EmployeeContactUpdateView(LoginRequiredMixin, UpdateView):
     fields = ['contact_info']
     template_name = 'contact_info_update.html'
 
-class WelcomePage(TemplateView):
-    template_name = 'welcome.html'
+class CompanyViewSet(viewsets.ModelViewSet):
+    """Company model viewset for REST API"""
+    queryset = Company.objects.all().order_by('name')
+    serializer_class = CompanySerializer
+
+class EmployeeViewSet(viewsets.ModelViewSet):
+    """Company model viewset for REST API"""
+    queryset = Employee.objects.all().order_by('user')
+    serializer_class = EmployeeSerializer
