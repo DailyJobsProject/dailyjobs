@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-	<div class="gray-box" style="margin: 30px 0px 30px 30px; width: 60%;">
+	<div class="gray-box update" style="margin: 30px 0px 30px 30px; width: 60%;">
 		<form id='postForm' action="{% url 'posts:create' %}" method="POST">
 				{% csrf_token %}
 				{% for field in form %}
@@ -12,7 +12,8 @@
 
 				{% endfor %}
 
-				<input type="submit" value="Post" class="btn btn-success">
+				<input type="submit" value="Post" class="general-btn" 
+				style="background-color: lightgreen;">
 		</form>
 	</div>
 {% endblock  %}

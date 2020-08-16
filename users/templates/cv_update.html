@@ -3,11 +3,13 @@
 
 <!-- Employee.cv -->
 {% block content %}
-  <div class="container" style="margin-top: 20;">
+  <div class="gray-box update top-margin left-margin">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form|crispy }}
-      <button type="submit" class="btn btn-warning">Upload CV</button>
+      <button type="submit" class="general-btn">Upload CV</button>
+
     </form>
+
   </div>
 {% endblock %}

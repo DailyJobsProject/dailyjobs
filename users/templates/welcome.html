@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
+<!-- Welcome Page: localhost:8000 -->
 
 {% block content %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="welcome-page gray-box" style="margin-top: 20px;">
-  <p style="font-size: xx-large; text-align: center;">Welcome to DailyJobs!</p>
+<div class="welcome-page gray-box">
+  <p class="center no-margin xx-large serif">Welcome to DailyJobs!</p>
   <br>
 
   <p class="welcome-page-description">DailyJobs is a one-day-job platform where you can post job offers as a company and apply for jobs as a potential employee.
@@ -13,30 +13,28 @@
   <br>
 
   {% if user.is_authenticated %}
-    <div class="home-btns flex" style="margin-top: 20px;">
-    <a class="signup-btn" style="text-decoration: none; margin-right: 80px;" href="{% url 'posts:list' %}">Job Offers</a>
+    <div class="flex space-between top-margin">
+    <a class="general-btn" href="{% url 'posts:list' %}">Job Offers</a>
     
     {% if user.is_company %}
-      <a class="signup-btn" style="text-decoration: none" href="{% url 'users:company_detail' pk=user.pk %}">My profile</a>
+      <a class="general-btn" href="{% url 'users:company_detail' pk=user.pk %}">My profile</a>
 
     {% elif user.is_employee %}
-      <a class="signup-btn" style="text-decoration: none" href="{% url 'users:employee_detail' pk=user.pk %}">My profile</a>
+      <a class="general-btn" href="{% url 'users:employee_detail' pk=user.pk %}">My profile</a>
 
     {% endif %}
 
   </div>
 
-</div>
-
   {% else %}
-  <div class="home-btns flex" style="margin-top: 30px; justify-content: space-between;">
-    <span><a class="signup-btn" style="text-decoration: none;" href="{% url 'login' %}">Login</a></span>
-    <span><a class="signup-btn" style="text-decoration: none;" href="{% url 'users:signup' %}">SignUp</a></span>
+  <div class="flex space-between home-btns top-margin">
+    <span><a class="general-btn left-margin" href="{% url 'login' %}">Login</a></span>
+    <span><a class="general-btn right-margin" href="{% url 'users:signup' %}">SignUp</a></span>
     
   </div>
 
-</div>
   {% endif %}
-  
-  
+
+</div>  
+
 {% endblock  %}

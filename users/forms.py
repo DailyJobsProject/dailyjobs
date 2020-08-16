@@ -73,7 +73,7 @@ class EmployeeUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Employee
-        fields = ['about', 'contact_info', 'image']
+        fields = ['about', 'telephone']
 
         widgets = {
             'about': forms.Textarea(attrs={'rows':10, 'cols':80}),

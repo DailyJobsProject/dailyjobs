@@ -3,11 +3,14 @@
 
 <!-- Employee.contact_info -->
 {% block content %}
-  <div class="gray-box" style="margin: 30px 0px 0px 30px; width: 60%;">
+  <div class="gray-box update top-margin left-margin" style="width: 60%;">
     <form method="post">
       {% csrf_token %}
       {{ form|crispy }}
-      <button type="submit" class="btn btn-warning">Update</button>
+      <button type="submit" class="general-btn">Update</button>
+
     </form>
+
   </div>
+
 {% endblock %}

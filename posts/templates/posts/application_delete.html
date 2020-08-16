@@ -2,15 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-	<div class="container" style="margin-top: 20;">
-		<form action="" method="post">
+	<div class="gray-box top-margin left-margin update" style="width: 60%;">
+		<h4>Are you sure you want to unapply on this job?</h4>
+		<form id='postForm' method="POST">
 			{% csrf_token %}
 			{{ form|crispy }}
-			<p>
-				Are you sure that you want unapply from this job?
-			</p>
-			<input type="submit" class="btn btn-warning" value="Unapply"/>
+			<input type="submit" value="Unapply" class="general-btn"
+			style="background-color: red;">
 		</form>
 	</div>
-{% endblock %}
-
+{% endblock  %}

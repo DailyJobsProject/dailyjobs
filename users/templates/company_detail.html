@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static %}.
 
 {% block content %}
 
@@ -7,21 +7,21 @@
   <!-- If the logged in Company is the owner of the currently accesed profile page,
     fields can pe updated -->
 
-  <div class="container top-margin" style="margin-bottom: 40px;">
+  <div class="container top-margin bot-margin">
     <ul class="flex">
       <li>
-        <h2 style="margin: 0px 0px 10px 0px;">@{{company.name}}</h2>
+        <h2>@{{company.name}}</h2>
 
         <!--If user has uploaded profile picture, it will be fetched from media/profile_pics-->
         {% if company.image %} 
-            <img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
+            <img src="{{ company.image.url }}", class="thumbnail" alt="img" style="height: 128px; width: 128px;">
             <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
-                <input class="signup-btn" type="submit" value="Upload" />
+                <input class="general-btn" type="submit" value="Upload" />
             </form>
 
         <!-- If user hasn't uploaded any profile pictures, a placeholder image will be fetched from static/users/user.png -->
         {% else %}
-            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+            <img src="{% static 'users/user.png' %}" class="thumbnail" alt="Upload profile pic" style="height: 128px; width: 128px;">
             <form action="{% url 'users:cprofilepic_update' pk=user.pk%}">
                 <input type="submit" value="Upload" />
             </form>
@@ -31,23 +31,30 @@
 
       <!--Company Description -->
       <li>
-        <ul class="flex flex-column gray-box">
+        <ul class="flex flex-column gray-box" style="padding-right: 0px;">
           <li>
             <h2>About</h2>
-            <p style="font-size: medium;">{{company.about}}</p>
+            <p class="justify medium">{{company.about}}</p>
             <br>
               <form action="{% url 'users:company_update' pk=user.pk%}">
-                <input class="signup-btn" type="submit" value="Edit About" />
+                <input class="general-btn" type="submit" value="Edit About" />
+
               </form>
             <br><br>
+
             <!-- Companypost Create View -->
-            <h4><a class="btn btn-success" href="{% url 'posts:create' %}">Create Post</a></h4>
+            <h2 class="create-post">
+              <a class="general-btn" 
+                style="background-color: lightgreen; font-size: xx-large;" 
+                href="{% url 'posts:create' %} " >Create Post
+              </a>
+            </h2>
 
           </li>
 
-          <li style="padding: 0px;">            
+          <li>            
             <!--Current Company Posts List View -->
-            <div class="flex" style="justify-content: space-between;">
+            <div class="flex space-between">
               <h3 style="margin-bottom: 0;">
                 <p>My job posts</p>
                 <p>_____________</p>
@@ -76,39 +83,54 @@
 
 {% else %}
   <!-- Non updateable Company profile page -->
-  <div class="container">
+  <div class="container top-margin bot-margin">
     <ul class="flex">
       <li>
         <h2>@{{company.name}}</h2>
 
         {% if company.image %}
-            <img src="{{ company.image.url }}", class="img-responsive thumbnail" alt="img" style="height: 128px; width: 128px;">
+            <img src="{{ company.image.url }}", class="thumbnail" alt="img" style="height: 128px; width: 128px;">
 
         {% else %}
-            <img src="{% static 'users/user.png' %}" alt="Upload profile pic" style="height: 100px; width: 100px;">
+            <img src="{% static 'users/user.png' %}" class="thumbnail" alt="Upload profile pic" style="height: 100px; width: 100px;">
 
         {% endif %}
 
       </li>
 
+      <!-- Company Description -->
       <li>
-        <ul class="about-postlist">
+        <ul class="gray-box">
           <li>
             <h2>About</h2>
             {{company.about}}
 
           </li>
+          <br>
+          <li style="padding: 0px;">            
+            <!--Current Company Posts List View -->
+            <div class="flex" style="justify-content: space-between;">
+              <h3 style="margin-bottom: 0;">
+                <p>{{company.name}}'s job posts</p>
+                <p>_____________</p>
+              </h3>
+              <h3 style="margin-bottom: 0;">
+                <p>Published on</p>
+                <p>_____________</p>
+              </h3>
+            </div>
+            {% for post in my_posts %}            
+              {% if post.user|striptags == company.user.username|striptags %}
+                <div class="flex" style="justify-content: space-between;">
+                  <h4 style="max-width: 500px;"><a style="color: black;" href=" {% url 'posts:detail' pk=post.pk %}">{{post.title}}</a></h4>
+                  {{post.created_at}}
 
-          <li>
-            <h3>{{company.name}}'s job posts</h3>
-            {% for post in my_posts %}
-
-              {% if company.user|striptags == post.user|striptags %}
-              <h3><a href="{% url 'posts:detail' pk=post.pk %}">{{post.title}}</a></h3>
+                </div> 
               {% endif %}
 
             {% endfor %}
-
+          
+          
           </li>
 
         </ul>

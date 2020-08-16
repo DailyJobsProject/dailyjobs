@@ -2,7 +2,7 @@
 
 <!-- Company.image -->
 {% block content %}
-  <div class="container gray-box" style="margin-top: 20px;">
+  <div class="gray-box top-margin left-margin update">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form %}
@@ -11,7 +11,7 @@
 
       {% endfor %}
 
-      <button type="submit" class="btn btn-warning">Update</button>
+      <button type="submit" class="general-btn">Update</button>
 
     </form>
 

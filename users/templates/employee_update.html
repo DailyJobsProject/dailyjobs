@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-<!-- Employee.about -->
+<!-- Employee.about/telephone -->
 {% block content %}
-  <div class="container" style="margin-top: 20;">
+  <div class="gray-box update" style="width: 60%; margin: 30px 0px 30px 30px;">
     <form method="post">
       {% csrf_token %}
       {% for field in form %}
@@ -13,7 +13,7 @@
       
       {% endfor %}
       
-      <button type="submit" class="btn btn-warning">Update</button>
+      <button type="submit" class="general-btn">Update</button>
     </form>
   </div>
 {% endblock %}

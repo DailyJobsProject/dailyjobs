@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="form flex flex-column signup-page" style="margin-top: 40px;">
-	<h1 style="text-align: center; margin-top: 30px;">Sign Up as:</h1>
-	<div class="flex signup-div" style="margin-top: 30px; margin-bottom: 30px; justify-content: space-around;">
-		<span><a class="signup-btn" style="text-decoration: none;" href="{% url 'users:company_signup' %}" >Company</a></span>
-		<span><a class="signup-btn" style="text-decoration: none;" href="{% url 'users:employee_signup' %}">Employee</a></span>
+
+<!-- Sign up buttons for Company and Employee -->
+<div class="form flex flex-column gray-box top-margin">
+	<h1 class="center top-margin">Sign Up as:</h1>
+	<div class="flex top-margin space-around margin-bottom">
+		<span><a class="general-btn" href="{% url 'users:company_signup' %}" >Company</a></span>
+		<span><a class="general-btn" href="{% url 'users:employee_signup' %}">Employee</a></span>
 	</div>
 </div>
 

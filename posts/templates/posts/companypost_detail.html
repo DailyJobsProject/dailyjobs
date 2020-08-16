@@ -2,32 +2,24 @@
 {% load static %}
 
 {% block content %}
+		<ul class="flex" style="margin: 20px 0px 0px 40px;">
+			<li class="gray-box post-description" style="background-color: rgb(232,232,232, 0.7); width: 100%;">
+				<div class="flex" style="flex-direction: column;">
+					<h2 style="margin: 0px; color: black;"> {{ companypost.title }}</h2>
+					<p style="font-size: medium; color: gray;">Published on: {{ companypost.created_at }}</p>
+					<ul style="margin-bottom: 0px;">
+						{% for company in companies %}
+								{% if companypost.user|striptags ==  company.user|striptags %}
+										<h3>by <a href="{% url 'users:company_detail' pk=company.user.pk %}">@{{ companypost.user.company.name }}</a></h3>
+								<br>
+		
+								{% endif %}
+										
+						{% endfor %}
+						
+					</ul>
 
-<div style="background-image: url('{% static 'title_bar3.png' %}'); background-repeat: no-repeat; background-size:cover;">
-	<br><br>
-	<div class="container" >
-		<div class="flex">
-			<ul style="margin-bottom: 0px;">
-				<p style="font-size: large; color: gray;">Published on: {{ companypost.created_at }}</p>
-				{% for company in companies %}
-						{% if companypost.user|striptags ==  company.user|striptags %}
-								<h2>by <a href="{% url 'users:company_detail' pk=company.user.pk %}">@{{ companypost.user.company.name }}</a></h2>
-						<br>
-
-						{% endif %}
-								
-				{% endfor %}
-			</ul>
-			<h2 style="margin: 0px; color: white;"> {{ companypost.title }}</h2>
-	</div>
-</div>
-
-</div>
-
-  <div class="container" style="width: 80%;">
-		<ul class="flex" style="margin-top: 20px;">
-			<li class="gray-box" style="background-color: rgb(232,232,232, 0.7);">
-				
+				</div>
 				
 				<p class="job-description" >{{companypost.description}}</p>
 				<br>
@@ -36,30 +28,34 @@
 				{% if user.is_employee %}
 						{% for application in applications %}
 								{% if companypost.title|striptags|add:user.username|striptags == application.identifier|striptags %}
-										<p>You applied for this job</p>
+										<h4 class="serif bot-margin">You applied for this job</h4>
 
-										<a href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
+										<a class="general-btn" href="{% url 'posts:application_delete' pk=application.pk %}">Unapply</a>
 
 								{% endif %}
 
 						{% endfor %}
 
-						{% if companypost.title|striptags|add:user.username|striptags not in identifiers %}
-								<a href="{% url 'posts:apply' pk=companypost.pk %}">Apply</a>
+					{% if companypost.title|striptags|add:user.username|striptags not in identifiers %}
+								<a class="general-btn" href="{% url 'posts:apply' pk=companypost.pk %}">Apply</a>
 
-						{% endif %}
+					{% endif %}
 
-				</li>	
+			</li>
 
 				{% elif user.is_company %}
-
-				<div class="buttons">
-					<h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="btn btn-danger">Delete Post</a></h3>
-					<h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="btn btn-warning">Update Post</a></h3>
 				
-				</div>
+				{% if companypost.user == user.company.user %}
+					<div class="flex">
+						<h3><a href="{% url 'posts:update' pk=companypost.pk %}" class="general-btn" 
+							style="background-color: orange; text-decoration: none; margin-right: 20px;">Update Post</a></h3>
 
-					<li class="gray-box" style="background-color: rgb(232,232,232, 0.7); margin-left: 200px; ">
+						<h3><a href="{% url 'posts:delete' pk=companypost.pk %}" class="general-btn" 
+							style="background-color: red; text-decoration: none;">Delete Post</a></h3>
+
+					</div>
+				
+					<li class="gray-box" style="background-color: rgb(232,232,232, 0.7); margin-left: 150px; padding: 0px 70px 0px 70px;">
 						<br>
 						<h3 style="margin-bottom: 0px;">Applications</h3>
 						<p>_____________________</p>
@@ -67,24 +63,22 @@
 						{% for application in applications %}
 							{% if application.post|striptags == companypost.title|striptags %}
 								<h2><a href="{% url 'users:employee_detail' pk=application.name.pk %}">{{application.name}}</a></h2>
-							
+
 							{% endif %}
 
 						{% endfor %}
-						
+
 					</li>
+				{% endif %}
 			</li>
 
 		</ul>
-
-			<h3 style="margin-top: 50px">
-				<a class="btn btn-succes" style="margin-bottom: 20px ; font-size: large; background-color: rgb(0, 209, 28); color: white;" href="{% url 'posts:list' %} ">
-					Return to Job Offers
-				</a>
-			</h3>
+		<div style="margin: 40px 0px 0px 40px;">
+			<a class="general-btn" style="text-decoration: none; background-color: rgb(0, 209, 28);" href="{% url 'posts:list' %} ">
+				Return to Job Offers
+			</a>
+		</div>
 
     {% endif %}
-
-    </div>
 
 {% endblock  %}

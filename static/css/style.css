@@ -3,6 +3,8 @@
     padding: 0;
 }
 
+
+/* TAGS */
 p {
     font-family: serif;
 }
@@ -13,9 +15,25 @@ ul {
     
 }
 
+html, content {
+    height: 100%;
+}
+
+
+/* GENERAL PURPOSE */
+
+/* flex options */
 .flex {
     display: flex;
 
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.space-between {
+    justify-content: space-between;
 }
 
 .flex > li {
@@ -26,20 +44,50 @@ ul {
     flex-direction: column;
 }
 
-.description {
+
+/* text options */
+.justify {
     text-align: justify;
 }
 
-.buttons {
-    display: flex;
+.center {
+    text-align: center;
 }
 
-
-html, content {
-    height: 100%;
+.serif {
+    font-family: serif;
 }
 
-#footer {
+.xx-large {
+    font-size: xx-large;
+}
+
+.medium {
+    font-size: medium;
+}
+
+/* margin options */
+.top-margin {
+    margin-top: 30px;
+}
+
+.right-margin {
+    margin-right: 30px;
+}
+
+.bot-margin {
+    margin-bottom: 30px;
+}
+
+.left-margin {
+    margin-left: 30px;
+}
+
+.no-margin {
+    margin-top: 0px;
+}
+
+.footer {
     background-color: #101010;
     position: fixed;
     left: 0;
@@ -49,6 +97,7 @@ html, content {
     clear: both;
 }
 
+/* USED IN CreateView AND UpdateView */
 .form {
     margin: auto;
     width: 450px;
@@ -61,19 +110,7 @@ html, content {
     background-color: rgba(169,169,169, 0.4);
 }
 
-.form-registration {
-    margin: auto;
-    width: 400px;
-    padding: 10px;
-    border: black;
-    border-radius: 25px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    padding: 30px 50px 50px 50px;
-    background-color: rgba(169,169,169, 0.4);
-}
-
-
+/* USED IN SignUp Forms Buttons */
 .auth-btns{
     color: white;
     padding:  10px 24px;
@@ -83,7 +120,7 @@ html, content {
     height: 100%;
 }
 
-.signup-btn {
+.general-btn {
     color: white;
     background-color: #1aa3ff;
     padding:  10px 24px;
@@ -93,41 +130,32 @@ html, content {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-a:visited{
-    text-decoration: none;
-}
-
-.top-margin {
-    margin-top: 40px;
-}
-
-.no-margin {
-    margin-top: 0px;
-}
-
-.welcome-page {
+.update .general-btn {
     border: black;
-    border-radius: 25px;
-    padding: 30px 50px 50px 50px;
-    background-color: rgba(169,169,169, 0.4);
+    background-color: orange;
+    color: white;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,
+    border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+}
+
+/* USED IN users/welcome.html */
+.welcome-page {
     margin: auto;
+    margin-top: 30px;
     width: 550px;
 }
 
-.signup-page {
-    border: black;
-    border-radius: 25px;
-    background-color: rgba(169,169,169, 0.4);
-    margin-top: 20px;
-}
 
+/* USED IN users/welcome.html */
 .welcome-page-description{
     width: 400px;
     text-align: justify;
     margin: auto;
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
+/* div IN base.html */
 .content {
     background-repeat: no-repeat;
     background-size: cover;
@@ -138,11 +166,13 @@ a:visited{
     background-blend-mode: darken; 
 }
 
-.home-btns {
+/* USED IN welcome.html */
+/* .home-btns {
     margin: auto;
     width: 400px;
-}
+} */
 
+/* USED TO CREATE GRAY TRANSPARENT BACKGROUND FOR divs */
 .gray-box {
     border: black;
     border-radius: 25px;
@@ -150,14 +180,28 @@ a:visited{
     background-color: rgba(225, 225, 225, 0.4);
 }
 
+/* HOVER OPTIONS */
 input[type="submit"] {
     border: black;
     background-color: #1aa3ff;
     color: white;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,
+    border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
+}
+
+.update button:hover {
+    color: gray;
 }
 
 input[type="submit"]:hover {
     color: #337ab7;
+}
+
+.create-post .general-btn:hover {
+    color: green;
+}
+
+.post-description .general-btn:hover {
+    color: gray;
 }

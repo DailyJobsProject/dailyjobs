@@ -14,6 +14,9 @@ from django.contrib.auth import get_user_model
 
 from .serializers import CompanyPostSerializer, ApplicationSerializer
 
+from django.db.models import Q
+
+
 User = get_user_model()
 
 
@@ -134,12 +137,18 @@ class SearchView(ListView):
     model = CompanyPost
     template_name = 'posts/companypost_list.html'
     context_object_name = 'posts'
+
     def get_queryset(self):
-        result = super(SearchView, self).get_queryset()
-        query = self.request.GET.get('search')
-        if query:
-            postresult = CompanyPost.objects.filter(title__contains=query)
-            result = postresult
-        else:
-            result = None
-        return result
+        query = self.request.GET.get('search').split()
+
+        if len(query) == 0:
+            return ''
+            
+        q_object = Q(title__icontains=query[0])
+
+        for item in query:
+            q_object.add(Q(title__icontains=item), q_object.connector)
+
+        queryset = CompanyPost.objects.filter(q_object)
+
+        return queryset
