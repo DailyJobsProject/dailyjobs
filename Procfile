@@ -1,0 +1,1 @@
+web: gunicorn dailyjobs.wsgi --log-file -
