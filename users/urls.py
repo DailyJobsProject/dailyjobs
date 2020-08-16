@@ -19,7 +19,6 @@ urlpatterns = [
 
     # Rest API
     path('rest/', include(router.urls)),
-    path('rest_api/', include('rest_framework.urls', namespace='rest_framework')),
 
     # Registration / Login
     path('signup/', views.SignUpView.as_view(), name='signup'),

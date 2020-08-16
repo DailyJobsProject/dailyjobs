@@ -141,9 +141,6 @@
 
             <h2>Contact info </h2>
             <p>{{ employee.contact_info|linebreaks }}</p>
-            
-            <h3>Phone: {{ employee.telephone }}</h3>
-            <p>_______________________</p>
 
             <!-- If there the user uploaded a CV, it will be fetched from media/CVs -->
             {% if employee.cv %}
