@@ -113,8 +113,8 @@ html, content {
 
 /* USED IN users/about.html */
 .about-img {
-    height: 260px; 
     width: 350px; 
+    height: 260px; 
     border: solid rgb(95, 95, 95); 
     border-radius: 15px; border-width: 2px;
 }
