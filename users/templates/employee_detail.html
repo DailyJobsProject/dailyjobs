@@ -36,7 +36,7 @@
             <h2>About</h2>
             <p class="justify medium">{{ employee.about }}</p>
             <h3 class="serif">Phone: {{ employee.telephone }}</h3>
-            <br>
+
             <!-- Update employee.about -->
             <form action="{% url 'users:employee_update' pk=user.pk%}">
                 <input class="general-btn" type="submit" value="Edit Description" />
@@ -58,7 +58,7 @@
             <!-- If there the user uploaded a CV, it will be fetched from media/CVs -->
             {% if employee.cv %}
               <span>
-                <h3>
+                <h3 class="bot-margin">
                     <a class="general-btn" href="{{ employee.cv.url }}">{{ employee.user.username }}'s CV</a>
                 </h3>
               </span>
