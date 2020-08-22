@@ -113,7 +113,7 @@ html, content {
 
 /* USED IN users/about.html */
 .about-img {
-    height: 260px; 
+    height: 260px;
     width: 350px; 
     border: solid rgb(95, 95, 95); 
     border-radius: 15px; border-width: 2px;
@@ -190,6 +190,8 @@ html, content {
     font-family: 'Open Sans', sans-serif;
 }
 
+
+}
 /* div IN base.html */
 .content {
     background-repeat: no-repeat;
@@ -206,7 +208,7 @@ html, content {
     border: black;
     border-radius: 25px;
     padding: 30px 50px 50px 50px;
-    background-color: rgba(225, 225, 225, 0.4);
+    background-color: rgba(242, 242, 242 0.4);
 }
 
 /* HOVER OPTIONS */
@@ -233,6 +235,7 @@ input[type="submit"]:hover {
 
 .post-description .general-btn:hover {
     color: gray;
+
 }
 
 .personal-posts a:hover{
